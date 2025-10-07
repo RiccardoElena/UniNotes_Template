@@ -1,0 +1,41 @@
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.blg
+*.bbl
+*.bcf
+*.run.xml
+*.lof
+*.lot
+*.pdf
+
+# BibTeX/BibLaTeX temporary files
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+
+# PDF output (commentare se vuoi versionare i PDF)
+# *.pdf
+
+# Editor files
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Linters and formatters
+.chktexrc
+
+# Build directory
+build/
+
+# others
+raw/**
+raw/*

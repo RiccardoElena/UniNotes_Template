@@ -1,0 +1,516 @@
+% =============================================================================
+% GUIDA RAPIDA - Personalizzazione Template CS Notes
+% =============================================================================
+
+\documentclass{csnotes}
+
+\title{Guida Rapida}
+\author{Template CS Notes}
+\date{\today}
+
+\university{Guida di Riferimento}
+\department{Personalizzazione}
+\course{Template LaTeX}
+\subject{Computer Science Notes}
+\academicyear{2024/2025}
+\addbibresource{bibliography.bib} 
+
+\begin{document}
+\maketitlepage{}
+\tableofcontents
+\newpage
+
+% =============================================================================
+% COMANDI E AMBIENTI
+% =============================================================================
+
+\section{Comandi e Ambienti Disponibili}
+
+\subsection{Ambienti per Contenuti Teorici}
+
+\begin{definition}[Nome Definizione (opzionale)]
+Usa l'ambiente \code{definition} per definizioni formali.
+Colore: Blu
+\end{definition}
+
+\begin{theorem}[Nome Teorema (opzionale)]
+Usa l'ambiente \code{theorem} per teoremi importanti.
+Colore: Rosso
+\end{theorem}
+
+\begin{lemma}[Nome Lemma (opzionale)]
+Usa l'ambiente \code{lemma} per lemmi e risultati ausiliari.
+Colore: Arancione
+\end{lemma}
+
+\begin{proposition}[Nome Proposizione (opzionale)]
+Usa l'ambiente \code{proposition} per proposizioni.
+Colore: Viola
+\end{proposition}
+
+\begin{corollary}[Nome Corollario (opzionale)]
+Usa l'ambiente \code{corollary} per corollari.
+Colore: Verde
+\end{corollary}
+
+\subsection{Ambienti Pratici}
+
+\begin{example}[Nome Esempio (opzionale)]
+Usa l'ambiente \code{example} per esempi pratici e casi d'uso.
+Colore: Teal
+\end{example}
+
+\begin{note}[Titolo Nota (opzionale)]
+Usa l'ambiente \code{note} per note e osservazioni importanti.
+Colore: Giallo
+\end{note}
+
+\begin{warning}[Titolo Avviso (opzionale)]
+Usa l'ambiente \code{warning} per avvisi, errori comuni, attenzioni.
+Colore: Rosso
+\end{warning}
+
+\begin{algorithmdesc}[Nome Algoritmo (opzionale)]
+Usa l'ambiente \code{algorithmdesc} per descrizioni di algoritmi.
+Colore: Grigio-blu
+\end{algorithmdesc}
+
+% =============================================================================
+% DIMOSTRAZIONE
+% =============================================================================
+
+\section{Dimostrazioni}
+
+\begin{theorem}[Esempio con Dimostrazione]
+Questo è un teorema che richiede una dimostrazione.
+\end{theorem}
+
+\begin{proof}
+Scrivi qui la dimostrazione. Alla fine verrà aggiunto automaticamente
+il simbolo QED \(\square\).
+\end{proof}
+
+% Dimostrazione con titolo personalizzato
+\begin{proof}[Dimostrazione per assurdo]
+Puoi anche personalizzare il titolo della dimostrazione.
+\end{proof}
+
+% =============================================================================
+% COMANDI SPECIALI
+% =============================================================================
+
+\section{Comandi Speciali}
+
+\subsection{Formattazione Testo}
+
+\begin{itemize}
+    \item \keyword{Parola chiave} --- Evidenzia termini importanti in blu grassetto
+    \item \code{codice inline} --- Formatta codice inline con sfondo grigio
+    \item \textbf{Grassetto normale} --- Grassetto standard
+    \item \textit{Corsivo normale} --- Corsivo standard
+\end{itemize}
+
+\subsection{Notazioni di Complessità}
+
+\begin{example}[Complessità Computazionale]
+Usa i comandi dedicati per le notazioni asintotiche:
+\begin{itemize}
+    \item \code{\textbackslash{}BigO\{n\}} produce: \(\BigO{n}\)
+    \item \code{\textbackslash{}BigOmega\{n log n\}} produce: \(\BigOmega{n \log n}\)
+    \item \code{\textbackslash{}BigTheta\{n\^{}2\}} produce: \(\BigTheta{n^2}\)
+\end{itemize}
+\end{example}
+
+% =============================================================================
+% CODICE
+% =============================================================================
+
+\section{Inserimento Codice}
+
+\subsection{Codice Inline}
+
+Usa il comando \code{\textbackslash{}code\{...\}} per brevi snippet inline, 
+ad esempio: \code{int x = 42;} o \code{list.append(item)}.
+
+\subsection{Blocchi di Codice}
+
+\begin{example}[Sintassi lstlisting]
+Per blocchi di codice più lunghi usa l'ambiente \code{lstlisting}:
+\end{example}
+
+\begin{lstlisting}[language=Python, caption=Esempio base]
+def hello(name):
+    """Saluta una persona."""
+    print(f"Ciao, {name}!")
+
+hello("Mario")
+\end{lstlisting}
+
+\begin{note}[Linguaggi Supportati]
+Alcuni dei linguaggi supportati:
+\begin{itemize}
+    \item Python
+    \item Java
+    \item C, C++
+    \item JavaScript
+    \item SQL
+    \item Haskell
+    \item Bash
+    \item E molti altri...
+\end{itemize}
+\end{note}
+
+\subsection{Opzioni Listing}
+
+\begin{lstlisting}[
+    language=C++,
+    caption=Opzioni personalizzate,
+    label=lst:esempio,
+    numbers=left,
+    firstnumber=1,
+]
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello World!" << endl;
+    return 0;
+}
+\end{lstlisting}
+
+Puoi riferire il listing~\ref{lst:esempio} usando le label.
+
+% =============================================================================
+% MATEMATICA
+% =============================================================================
+\newpage
+\section{Formule Matematiche}
+
+\subsection{Formule Inline}
+
+Usa \code{\textbackslash(...\textbackslash)} per formule inline: 
+\(E = mc^2\), \(x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\).
+
+\subsection{Formule Displayed}
+
+Usa \code{\textbackslash[...\textbackslash]} per formule centrate:
+\[
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+\]
+
+\subsection{Ambienti Equation}
+
+\begin{equation}
+    \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+    \label{eq:gaussian}
+\end{equation}
+
+Puoi riferire l'equazione~\eqref{eq:gaussian} usando label.
+
+\subsection{Sistemi di Equazioni}
+
+\begin{align}
+    x + y &= 5 \\
+    2x - y &= 1
+\end{align}
+
+% =============================================================================
+% LISTE E ENUMERAZIONI
+% =============================================================================
+
+\section{Liste}
+
+\subsection{Liste Puntate}
+
+\begin{itemize}
+    \item Primo elemento
+    \item Secondo elemento
+    \begin{itemize}
+        \item Sotto-elemento
+        \item Altro sotto-elemento
+    \end{itemize}
+    \item Terzo elemento
+\end{itemize}
+
+\subsection{Liste Numerate}
+
+\begin{enumerate}
+    \item Primo passo
+    \item Secondo passo
+    \begin{enumerate}
+        \item Sotto-passo a
+        \item Sotto-passo b
+    \end{enumerate}
+    \item Terzo passo
+\end{enumerate}
+
+\subsection{Liste Descrittive}
+
+\begin{description}
+    \item[Stack] Struttura LIFO (Last In First Out)
+    \item[Queue] Struttura FIFO (First In First Out)
+    \item[Heap] Albero binario con proprietà di ordinamento
+\end{description}
+
+% =============================================================================
+% TABELLE E FIGURE
+% =============================================================================
+
+\section{Tabelle}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Algoritmo} & \textbf{Complessità Media} & \textbf{Complessità Peggiore} \\
+\hline
+QuickSort & \(\BigO{n \log n}\) & \(\BigO{n^2}\) \\
+MergeSort & \(\BigO{n \log n}\) & \(\BigO{n \log n}\) \\
+HeapSort & \(\BigO{n \log n}\) & \(\BigO{n \log n}\) \\
+\hline
+\end{tabular}
+\caption{Confronto complessità algoritmi di ordinamento}
+\label{tab:sorting}
+\end{table}
+
+Riferimento alla tabella: vedi \cref{tab:sorting}.
+
+% =============================================================================
+% RIFERIMENTI
+% =============================================================================
+
+\section{Riferimenti Incrociati}
+
+\subsection{Come Usare Label e Ref}
+
+\begin{example}[Sistema di Label]
+Aggiungi label a sezioni, figure, tabelle, equazioni:
+\begin{lstlisting}[language=TeX]
+\section{Titolo}
+\label{sec:titolo}
+
+\begin{figure}
+    ...
+    \label{fig:grafico}
+\end{figure}
+
+\begin{equation}
+    ...
+    \label{eq:formula}
+\end{equation}
+\end{lstlisting}
+\end{example}
+
+\subsection{Tipi di Riferimenti}
+
+\begin{itemize}
+    \item \code{\textbackslash{}ref\{label\}} --- Numero dell'elemento
+    \item \code{\textbackslash{}eqref\{label\}} --- Riferimento a equazione con parentesi
+    \item \code{\textbackslash{}cref\{label\}} --- Riferimento intelligente (consigliato)
+    \item \code{\textbackslash{}Cref\{label\}} --- Come cref ma con maiuscola
+\end{itemize}
+
+% =============================================================================
+% BIBLIOGRAFIA
+% =============================================================================
+
+\section{Bibliografia (esempio)}
+
+Di seguito un esempio minimo di come usare BibLaTeX nel tuo progetto.  
+Nota: inserisci la linea \verb|\addbibresource{bibliography.bib}| nel preambolo del tuo main.tex (non qui), poi crea il file bibliography.bib nella root del progetto.
+
+\begin{lstlisting}[language=TeX]
+% Nel preambolo del main.tex:
+\addbibresource{bibliography.bib}
+
+% Nel corpo del documento (esempio di citazione):
+Come mostrato in \cite{cormen2009introduction}, gli algoritmi di ordinamento...
+% ...altro testo...
+
+% Alla fine del documento, prima di \end{document}:
+\printbibliography[title={Riferimenti Bibliografici}]
+\end{lstlisting}
+
+Esempio di file bibliography.bib:
+
+\begin{lstlisting}[language=TeX, caption=Esempio file bibliography.bib]
+@book{cormen2009introduction,
+  title     = {Introduction to Algorithms},
+  author    = {Cormen, Thomas H. and Leiserson, Charles E. and Rivest, Ronald L. and Stein, Clifford},
+  year      = {2009},
+  publisher = {MIT Press},
+}
+
+@article{dijkstra1959note,
+  title = {A note on two problems in connexion with graphs},
+  author = {Dijkstra, Edsger W.},
+  journal = {Numerische Mathematik},
+  year = {1959},
+  volume = {1},
+  pages = {269--271},
+}
+\end{lstlisting}
+
+
+
+
+% =============================================================================
+% ORGANIZZAZIONE FILE
+% =============================================================================
+
+\section{Organizzazione File}
+
+\subsection{Struttura Consigliata}
+
+\begin{lstlisting}[language=bash]
+project/
+├── main.tex          % File principale
+├── csnotes.cls      % Classe personalizzata
+├── _chapters/       % Cartella per capitoli
+│   ├── 0_intro.tex
+│   ├── 1_capitolo1.tex
+│   ├── 2_capitolo2.tex
+│   └── ...
+├── images/          % Cartella per immagini
+│   ├── figura1.png
+│   ├── figura2.jpg
+│   └── ...
+├── code/            % Cartella per codice sorgente
+│   ├── esempio.py
+│   ├── algoritmo.cpp
+│   └── ...
+└── bibliography.bib % File bibliografia
+\end{lstlisting}
+
+\subsection{Includere File Esterni}
+
+\begin{example}[Input e Include]
+\begin{lstlisting}[language=TeX]
+% Nel main.tex
+\section{Capitolo 1}
+\input{_chapters/capitolo1}
+
+\section{Capitolo 2}
+\input{_chapters/capitolo2}
+
+% Per codice esterno
+\lstinputlisting[language=Python]{code/esempio.py}
+\end{lstlisting}
+\end{example}
+
+% =============================================================================
+% PERSONALIZZAZIONE
+% =============================================================================
+
+\section{Personalizzazione}
+
+\subsection{Modificare i Colori}
+
+Per modificare i colori degli ambienti, modifica il file \code{csnotes.cls} 
+nella sezione \q{DEFINIZIONE COLORI}:
+
+\begin{lstlisting}[language=TeX]
+% Nel file csnotes.cls
+\definecolor{defcolor}{RGB}{0,102,204}   % Blu per definizioni
+\definecolor{thmcolor}{RGB}{220,50,47}   % Rosso per teoremi
+\definecolor{excolor}{RGB}{42,161,152}   % Teal per esempi
+% ... etc
+\end{lstlisting}
+
+\begin{note}[Colori RGB]
+Puoi usare qualsiasi valore RGB (0--255 per ogni componente) o nomi predefiniti
+come \code{red}, \code{blue}, \code{green}, ecc.
+\end{note}
+
+\subsection{Modificare Font e Margini}
+
+\begin{lstlisting}[language=TeX]
+% Nel file csnotes.cls
+
+% Dimensione base del font (default: 11pt)
+\LoadClass[a4paper,11pt]{article}
+
+% Margini (default: 2.5cm)
+\RequirePackage[margin=2.5cm, top=3cm, bottom=3cm]{geometry}
+\end{lstlisting}
+
+\subsection{Aggiungere Nuovi Ambienti}
+
+\begin{example}[Creare Ambiente Personalizzato]
+Per aggiungere un nuovo ambiente (es.\ \q{Esercizio}):
+\begin{lstlisting}[language=TeX]
+% Nel file csnotes.cls, dopo gli altri ambienti
+
+% Definisci il colore
+\definecolor{excolor}{RGB}{255,127,0}  % Arancione
+
+% Crea l'ambiente
+\newtcolorbox{exercisebox}[2][]{
+    theorembox=excolor,
+    title={Esercizio~#2},
+    #1
+}
+
+\newenvironment{exercise}[1][]
+  {\begin{exercisebox}{#1}}
+  {\end{exercisebox}}
+\end{lstlisting}
+
+Poi usalo così:
+\begin{lstlisting}[language=TeX]
+\begin{exercise}[Titolo]
+Testo dell'esercizio...
+\end{exercise}
+\end{lstlisting}
+\end{example}
+
+% =============================================================================
+% TIPS & TRICKS
+% =============================================================================
+
+\section{Suggerimenti}
+
+\begin{note}[Best Practices]
+\begin{enumerate}
+    \item \textbf{Consistenza}: Usa sempre lo stesso ambiente per lo stesso 
+    tipo di contenuto
+    \item \textbf{Brevità}: Mantieni i box relativamente brevi per evitare 
+    problemi con i page break
+    \item \textbf{Keywords}: Usa \code{\textbackslash{}keyword\{\}} per 
+    evidenziare termini importanti
+    \item \textbf{Organizzazione}: Dividi documenti lunghi in file separati
+    \item \textbf{Commenti}: Usa i commenti (\code{\%}) per annotazioni personali
+\end{enumerate}
+\end{note}
+
+\begin{warning}[Errori Comuni]
+\begin{itemize}
+    \item Non dimenticare di compilare due volte per aggiornare i riferimenti
+    \item Usa sempre \code{\textbackslash(...\textbackslash)} invece di 
+    \code{\$...\$} per la matematica inline
+    \item Controlla che i pacchetti richiesti siano installati
+    \item Non modificare il file \code{csnotes.cls} a meno che tu non sappia 
+    cosa stai facendo
+\end{itemize}
+\end{warning}
+
+% =============================================================================
+% RISORSE AGGIUNTIVE
+% =============================================================================
+
+\section{Risorse Utili}
+
+\subsection{Documentazione}
+
+\begin{itemize}
+    \item \textbf{tcolorbox}: \url{http://mirrors.ctan.org/macros/latex/contrib/tcolorbox/tcolorbox.pdf}
+    \item \textbf{listings}: \url{http://mirrors.ctan.org/macros/latex/contrib/listings/listings.pdf}
+    \item \textbf{amsmath}: \url{http://mirrors.ctan.org/macros/latex/required/amsmath/amsldoc.pdf}
+    \item \textbf{tikz}: \url{http://mirrors.ctan.org/graphics/pgf/base/doc/pgfmanual.pdf}
+\end{itemize}
+
+% =============================================================================
+% FINE
+% =============================================================================
+
+\end{document}
