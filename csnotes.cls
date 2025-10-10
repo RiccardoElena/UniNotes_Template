@@ -9,8 +9,11 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{csnotes}[2025/10/07 Computer Science Notes Class]
 
-% Classe base
-\LoadClass[a4paper,11pt]{article}
+% Classe base: usare report per supporto ai \chapter
+\LoadClass[a4paper,11pt,openany]{report}
+% Numerazione e TOC
+\setcounter{secnumdepth}{3} % numerazione fino a subsubsection
+\setcounter{tocdepth}{2}    % TOC: mostra fino a subsection
 
 % =============================================================================
 % ESSENTIAL PACKAGES
@@ -81,6 +84,7 @@
 \definecolor{csteal}{RGB}{42,161,152}        % Teal
 \definecolor{csyellow}{RGB}{181,137,0}       % Yellow
 \definecolor{csdarkgreen}{RGB}{46,139,87}    % Dark green (alternative)
+\definecolor{codestring}{RGB}{42,161,152}
 
 % Colors for environments
 \definecolor{defcolor}{RGB}{0,102,204}       % Definitions - Blue
@@ -122,7 +126,7 @@
 % TITLE FORMATTING
 % =============================================================================
 
-% Sezioni
+% Sections, subsections, subsubsections
 \titleformat{\section}
   {\Large\bfseries\color{csblue}}
   {\thesection}{1em}{}
@@ -135,6 +139,16 @@
 \titleformat{\subsubsection}
   {\normalsize\bfseries\color{csblue!60}}
   {\thesubsubsection}{1em}{}
+
+% Chapter formatting (for report class) - styled similarly to sections
+	\titleformat{\chapter}
+  {\huge\bfseries\color{csblue}}
+  {\thechapter}{1em}{}
+  [\titlerule]
+	\titlespacing*{\chapter}{0pt}{-10pt}{20pt}
+
+% Ensure chapter titles are used for the header (\leftmark)
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
 % =============================================================================
 % HYPERREF CONFIGURATION
@@ -352,6 +366,19 @@
 \newcommand{\BigOmega}[1]{\Omega\left(#1\right)}
 \newcommand{\BigTheta}[1]{\Theta\left(#1\right)}
 
+% Math commands
+\newcommand{\N}{\mathbb{N}}   % Natural numbers
+\newcommand{\Z}{\mathbb{Z}}   % Integers
+\newcommand{\Q}{\mathbb{Q}}   % Rational numbers
+\newcommand{\R}{\mathbb{R}}   % Real numbers
+\newcommand{\C}{\mathbb{C}}   % Complex numbers
+\newcommand{\abs}[1]{\left|#1\right|} % Absolute value
+\NewDocumentCommand{\set}{m o}{
+  \IfNoValueTF{#2}
+    {\left\{ #1 \right\}} % No condition
+    {\left\{ #1 \mid #2 \right\}} % With condition
+}
+
 % Improved cross-reference names
 \crefname{section}{Sezione}{Sezioni}
 \crefname{subsection}{Sottosezione}{Sottosezioni}
@@ -432,16 +459,25 @@
 % ALGORITHM CONFIGURATION
 % =============================================================================
 
-\algrenewcommand\algorithmicend{\textbf{fine}}
-\algrenewcommand\algorithmicdo{\textbf{fai}}
-\algrenewcommand\algorithmicwhile{\textbf{mentre}}
-\algrenewcommand\algorithmicfor{\textbf{per}}
-\algrenewcommand\algorithmicif{\textbf{se}}
-\algrenewcommand\algorithmicthen{\textbf{allora}}
-\algrenewcommand\algorithmicelse{\textbf{altrimenti}}
-\algrenewcommand\algorithmicreturn{\textbf{ritorna}}
-\algrenewcommand\algorithmicfunction{\textbf{funzione}}
-\algrenewcommand\algorithmicprocedure{\textbf{procedura}}
+\algrenewcommand\algorithmicend{\textbf{end}}
+\algrenewcommand\algorithmicdo{\textbf{do}}
+\algrenewcommand\algorithmicwhile{\textbf{while}}
+\algrenewcommand\algorithmicfor{\textbf{for}}
+\algrenewcommand\algorithmicif{\textbf{if}}
+\algrenewcommand\algorithmicthen{\textbf{then}}
+\algrenewcommand\algorithmicelse{\textbf{else}}
+\algrenewcommand\algorithmicreturn{\textbf{return}}
+\algrenewcommand\algorithmicfunction{\textbf{function}}
+\algrenewcommand\algorithmicprocedure{\textbf{procedure}}
+
+% ==========================
+% TODOs 
+% ==========================
+\RequirePackage[colorinlistoftodos,prependcaption,textsize=small]{todonotes}
+% rapid todo commands
+\newcommand{\TODO}[1]{\todo[color=warncolor!40]{#1}}         % margin
+\newcommand{\TODOinline}[1]{\todo[inline,color=warncolor!20]{#1}} % inline
+\newcommand{\FIXME}[1]{\todo[color=csyellow!45]{#1}}
 
 % =============================================================================
 % END OF CLASS
