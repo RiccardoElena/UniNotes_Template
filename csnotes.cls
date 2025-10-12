@@ -35,6 +35,7 @@
 \RequirePackage[dvipsnames,svgnames,x11names]{xcolor}
 \RequirePackage{tikz}
 \RequirePackage{tcolorbox}
+\RequirePackage{etoolbox}
 \tcbuselibrary{most}
 
 % Layout and geometry
@@ -53,7 +54,7 @@
 % Fonts and typography
 \RequirePackage{lmodern}
 \RequirePackage{microtype}
-\RequirePackage{csquotes}  % Per virgolette corrette
+\RequirePackage{csquotes}
 
 % Bibliography
 \RequirePackage[
@@ -244,9 +245,9 @@
 }
 
 % Definition environment
-\newtcolorbox{definitionbox}[2][]{
+\newtcolorbox[auto counter, number within=section]{definitionbox}[2][]{
     theorembox=defcolor,
-    title={Definizione~#2},
+    title={Definizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     #1
 }
 
@@ -255,9 +256,9 @@
   {\end{definitionbox}}
 
 % Theorem environment
-\newtcolorbox{theorembox}[2][]{
+\newtcolorbox[auto counter, number within=section]{theorembox}[2][]{
     theorembox=thmcolor,
-    title={Teorema~#2},
+    title={Teorema~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     #1
 }
 
@@ -266,9 +267,9 @@
   {\end{theorembox}}
 
 % Lemma environment
-\newtcolorbox{lemmabox}[2][]{
+\newtcolorbox[auto counter, number within=section]{lemmabox}[2][]{
     theorembox=lemcolor,
-    title={Lemma~#2},
+    title={Lemma~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     #1
 }
 
@@ -277,9 +278,9 @@
   {\end{lemmabox}}
 
 % Proposition environment
-\newtcolorbox{propositionbox}[2][]{
+\newtcolorbox[auto counter, number within=section]{propositionbox}[2][]{
     theorembox=propcolor,
-    title={Proposizione~#2},
+    title={Proposizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     #1
 }
 
@@ -288,9 +289,9 @@
   {\end{propositionbox}}
 
 % Corollary environment
-\newtcolorbox{corollarybox}[2][]{
+\newtcolorbox[auto counter, number within=section]{corollarybox}[2][]{
     theorembox=corcolor,
-    title={Corollario~#2},
+    title={Corollario~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     #1
 }
 
@@ -299,9 +300,9 @@
   {\end{corollarybox}}
 
 % Example environment
-\newtcolorbox{examplebox}[2][]{
+\newtcolorbox[auto counter, number within=section]{examplebox}[2][]{
     theorembox=excolor,
-    title={Esempio~#2},
+    title={Esempio~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     #1
 }
 
@@ -310,9 +311,9 @@
   {\end{examplebox}}
 
 % Note environment
-\newtcolorbox{notebox}[2][]{
+\newtcolorbox[auto counter, number within=section]{notebox}[2][]{
     theorembox=notecolor,
-    title={Nota~#2},
+    title={Nota~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     #1
 }
 
@@ -321,9 +322,9 @@
   {\end{notebox}}
 
 % Warning/Alert environment
-\newtcolorbox{warningbox}[2][]{
+\newtcolorbox[auto counter, number within=section]{warningbox}[2][]{
     theorembox=warncolor,
-    title={Attenzione~#2},
+    title={Attenzione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     #1
 }
 
@@ -332,9 +333,9 @@
   {\end{warningbox}}
 
 % Algorithm environment
-\newtcolorbox{algorithmbox}[2][]{
+\newtcolorbox[auto counter, number within=section]{algorithmbox}[2][]{
     theorembox=algocolor,
-    title={Algoritmo~#2},
+    title={Algoritmo~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     #1
 }
 
@@ -344,7 +345,7 @@
 
 % Customized proof environment
 \renewenvironment{proof}[1][Dimostrazione]
-  {\par\vspace{10pt}\noindent\textbf{\color{csblue}#1.}\ \itshape}
+  {\par\vspace{10pt}\noindent\textbf{\color{csblue}#1.}\ \itshape\phantomsection}
   {\hfill$\square$\par\vspace{10pt}}
 
 % =============================================================================
