@@ -34,6 +34,8 @@
 \RequirePackage{graphicx}
 \RequirePackage[dvipsnames,svgnames,x11names]{xcolor}
 \RequirePackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{cd}
 \RequirePackage{tcolorbox}
 \RequirePackage{etoolbox}
 \tcbuselibrary{most}
