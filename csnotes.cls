@@ -381,7 +381,7 @@
     {\left\{ #1 \right\}} % No condition
     {\left\{ #1 \mid #2 \right\}} % With condition
 }
-\newcommand{\st}{\;:\;} % such that
+\newcommand{\st}{:\;} % such that
 
 % Improved cross-reference names
 \crefname{section}{Sezione}{Sezioni}
