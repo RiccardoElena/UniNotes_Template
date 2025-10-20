@@ -153,6 +153,29 @@
 % Ensure chapter titles are used for the header (\leftmark)
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
+% -----------------------------------------------------------------------------
+% Abstract customization
+% By default use an Italian descriptive title instead of the English "Abstract".
+% Users can override with \setabstracttitle{...}
+\newcommand{\abstracttitle}{Scopo del documento}
+\newcommand{\setabstracttitle}[1]{\renewcommand{\abstracttitle}{#1}}
+
+\renewenvironment{abstract}
+  {%
+   % ensure abstract sits on its own page and is vertically centered
+   \cleardoublepage
+   \thispagestyle{plain}%
+   \vspace*{\fill}%
+   \begin{center}\bfseries\large\abstracttitle\end{center}\medskip
+   \begin{center}\itshape
+  }
+  {%
+   \end{center}%
+   \vspace*{\fill}%
+   \clearpage
+  }
+
+
 % =============================================================================
 % HYPERREF CONFIGURATION
 % =============================================================================
