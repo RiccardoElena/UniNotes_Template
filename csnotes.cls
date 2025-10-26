@@ -402,7 +402,7 @@
 \NewDocumentCommand{\set}{m o}{
   \IfNoValueTF{#2}
     {\left\{ #1 \right\}} % No condition
-    {\left\{ #1 \mid #2 \right\}} % With condition
+    {\left\{\,#1\,\middle|\,#2\,\right\}} % With condition
 }
 \newcommand{\st}{:\;} % such that
 
