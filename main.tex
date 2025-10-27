@@ -26,51 +26,51 @@
 
 \section{Comandi e Ambienti Disponibili}
 
-\subsection{Ambienti per Contenuti Teorici}
+\subsection{Ambienti per Contenuti Teorici}\label{sec:theoretical_environments}
 
-\begin{definition}[Nome Definizione (opzionale)]
+\begin{definition}{Nome Definizione (opzionale)}
 Usa l'ambiente \code{definition} per definizioni formali.
 Colore: Blu
 \end{definition}
 
-\begin{theorem}[Nome Teorema (opzionale)]
+\begin{theorem}{Nome Teorema (opzionale)}
 Usa l'ambiente \code{theorem} per teoremi importanti.
 Colore: Rosso
 \end{theorem}
 
-\begin{lemma}[Nome Lemma (opzionale)]
+\begin{lemma}{Nome Lemma (opzionale)}
 Usa l'ambiente \code{lemma} per lemmi e risultati ausiliari.
 Colore: Arancione
 \end{lemma}
 
-\begin{proposition}[Nome Proposizione (opzionale)]
+\begin{proposition}{Nome Proposizione (opzionale)}
 Usa l'ambiente \code{proposition} per proposizioni.
 Colore: Viola
 \end{proposition}
 
-\begin{corollary}[Nome Corollario (opzionale)]
+\begin{corollary}{Nome Corollario (opzionale)}
 Usa l'ambiente \code{corollary} per corollari.
 Colore: Verde
 \end{corollary}
 
-\subsection{Ambienti Pratici}
+\subsection{Ambienti Pratici}\label{sec:practical_environments}
 
-\begin{example}[Nome Esempio (opzionale)]
+\begin{example}{Nome Esempio (opzionale)}
 Usa l'ambiente \code{example} per esempi pratici e casi d'uso.
 Colore: Teal
 \end{example}
 
-\begin{note}[Titolo Nota (opzionale)]
+\begin{note}{Titolo Nota (opzionale)}
 Usa l'ambiente \code{note} per note e osservazioni importanti.
 Colore: Giallo
 \end{note}
 
-\begin{warning}[Titolo Avviso (opzionale)]
+\begin{warning}{Titolo Avviso (opzionale)}
 Usa l'ambiente \code{warning} per avvisi, errori comuni, attenzioni.
 Colore: Rosso
 \end{warning}
 
-\begin{algorithmdesc}[Nome Algoritmo (opzionale)]
+\begin{algorithmdesc}{Nome Algoritmo (opzionale)}
 Usa l'ambiente \code{algorithmdesc} per descrizioni di algoritmi.
 Colore: Grigio-blu
 \end{algorithmdesc}
@@ -81,7 +81,7 @@ Colore: Grigio-blu
 
 \section{Dimostrazioni}
 
-\begin{theorem}[Esempio con Dimostrazione]
+\begin{theorem}[label=thm:esempio]{Esempio con Dimostrazione}
 Questo è un teorema che richiede una dimostrazione.
 \end{theorem}
 
@@ -94,6 +94,15 @@ il simbolo QED \(\square\).
 \begin{proof}[Dimostrazione per assurdo]
 Puoi anche personalizzare il titolo della dimostrazione.
 \end{proof}
+
+\begin{warning}{}
+  In caso di ambienti senza titolo, vanno in ogni caso aggiunte le parentesi graffe vuote:
+  \begin{lstlisting}[language=TeX]
+    \begin{proposition}{}
+    ...
+    \end{proposition}
+  \end{lstlisting}
+\end{warning}
 
 % =============================================================================
 % COMANDI SPECIALI
@@ -112,7 +121,7 @@ Puoi anche personalizzare il titolo della dimostrazione.
 
 \subsection{Notazioni di Complessità}
 
-\begin{example}[Complessità Computazionale]
+\begin{example}{Complessità Computazionale}
 Usa i comandi dedicati per le notazioni asintotiche:
 \begin{itemize}
     \item \code{\textbackslash{}BigO\{n\}} produce: \(\BigO{n}\)
@@ -134,7 +143,7 @@ ad esempio: \code{int x = 42;} o \code{list.append(item)}.
 
 \subsection{Blocchi di Codice}
 
-\begin{example}[Sintassi lstlisting]
+\begin{example}{Sintassi lstlisting}
 Per blocchi di codice più lunghi usa l'ambiente \code{lstlisting}:
 \end{example}
 
@@ -146,7 +155,7 @@ def hello(name):
 hello("Mario")
 \end{lstlisting}
 
-\begin{note}[Linguaggi Supportati]
+\begin{note}{Linguaggi Supportati}
 Alcuni dei linguaggi supportati:
 \begin{itemize}
     \item Python
@@ -283,31 +292,42 @@ Riferimento alla tabella: vedi \cref{tab:sorting}.
 
 \subsection{Come Usare Label e Ref}
 
-\begin{example}[Sistema di Label]
+\begin{example}{Sistema di Label}
 Aggiungi label a sezioni, figure, tabelle, equazioni:
-\begin{lstlisting}[language=TeX]
-\section{Titolo}
-\label{sec:titolo}
+  \begin{lstlisting}[language=TeX]
+  \section{Titolo}
+  \label{sec:titolo}
 
-\begin{figure}
-    ...
-    \label{fig:grafico}
-\end{figure}
+  \begin{figure}
+      ...
+      \label{fig:grafico}
+  \end{figure}
 
-\begin{equation}
-    ...
-    \label{eq:formula}
-\end{equation}
-\end{lstlisting}
+  \begin{equation}
+      ...
+      \label{eq:formula}
+  \end{equation}
+  \end{lstlisting}
 \end{example}
+
+\begin{warning}{}
+  Per aggiungere riferimenti agli ambienti personalizzati della \Cref{sec:theoretical_environments} e della \Cref{sec:practical_environments} usare le label come proprietà opzionale dell'ambiente, ad esempio:
+  \begin{lstlisting}[language=TeX]
+    \begin{theorem}[label=thm:esempio]{Titolo Teorema}
+    ...
+    \end{theorem}
+  \end{lstlisting}
+  Poi puoi fare riferimento al teorema con \code{\textbackslash{}cref\{thm:esempio\}} per ottenere anche il tipo d'ambiente vicino alla reference, o con \code{\textbackslash{}ref\{thm:esempio\}} per ottenere solo il numero.
+  Ad esempio: vedi \ref{thm:esempio}, oppure vedi \cref{thm:esempio}, o ancora vedi \Cref{thm:esempio}.
+\end{warning}
 
 \subsection{Tipi di Riferimenti}
 
 \begin{itemize}
-    \item \code{\textbackslash{}ref\{label\}} --- Numero dell'elemento
-    \item \code{\textbackslash{}eqref\{label\}} --- Riferimento a equazione con parentesi
-    \item \code{\textbackslash{}cref\{label\}} --- Riferimento intelligente (consigliato)
-    \item \code{\textbackslash{}Cref\{label\}} --- Come cref ma con maiuscola
+    \item \code{\textbackslash{}ref\{label\}} --- Numero dell'elemento, esempio: \ref{sec:practical_environments}
+    \item \code{\textbackslash{}eqref\{label\}} --- Riferimento a equazione con parentesi \eqref{eq:gaussian}
+    \item \code{\textbackslash{}cref\{label\}} --- Riferimento intelligente (consigliato) esempio: \cref{tab:sorting}
+    \item \code{\textbackslash{}Cref\{label\}} --- Come cref ma con maiuscola esempio: \Cref{tab:sorting}
 \end{itemize}
 
 % =============================================================================
@@ -384,18 +404,18 @@ project/
 
 \subsection{Includere File Esterni}
 
-\begin{example}[Input e Include]
-\begin{lstlisting}[language=TeX]
-% Nel main.tex
-\section{Capitolo 1}
-\input{_chapters/capitolo1}
+\begin{example}{Input e Include}
+  \begin{lstlisting}[language=TeX]
+  % Nel main.tex
+  \section{Capitolo 1}
+  \input{_chapters/capitolo1}
 
-\section{Capitolo 2}
-\input{_chapters/capitolo2}
+  \section{Capitolo 2}
+  \input{_chapters/capitolo2}
 
-% Per codice esterno
-\lstinputlisting[language=Python]{code/esempio.py}
-\end{lstlisting}
+  % Per codice esterno
+  \lstinputlisting[language=Python]{code/esempio.py}
+  \end{lstlisting}
 \end{example}
 
 % =============================================================================
@@ -417,7 +437,7 @@ nella sezione \q{DEFINIZIONE COLORI}:
 % ... etc
 \end{lstlisting}
 
-\begin{note}[Colori RGB]
+\begin{note}{Colori RGB}
 Puoi usare qualsiasi valore RGB (0--255 per ogni componente) o nomi predefiniti
 come \code{red}, \code{blue}, \code{green}, ecc.
 \end{note}
@@ -436,7 +456,7 @@ come \code{red}, \code{blue}, \code{green}, ecc.
 
 \subsection{Aggiungere Nuovi Ambienti}
 
-\begin{example}[Creare Ambiente Personalizzato]
+\begin{example}{Creare Ambiente Personalizzato}
 Per aggiungere un nuovo ambiente (es.\ \q{Esercizio}):
 \begin{lstlisting}[language=TeX]
 % Nel file csnotes.cls, dopo gli altri ambienti
@@ -445,20 +465,19 @@ Per aggiungere un nuovo ambiente (es.\ \q{Esercizio}):
 \definecolor{excolor}{RGB}{255,127,0}  % Arancione
 
 % Crea l'ambiente
-\newtcolorbox{exercisebox}[2][]{
+\newtcolorbox{exercise}[2][]{
     theorembox=excolor,
     title={Esercizio~#2},
     #1
 }
-
-\newenvironment{exercise}[1][]
-  {\begin{exercisebox}{#1}}
-  {\end{exercisebox}}
+% Aggiungi localizzazione per il tipo di ambiente
+\crefname{exercise}{esercizio}{esercizi}
+\Crefname{exercise}{Esercizio}{Esercizi}
 \end{lstlisting}
 
 Poi usalo così:
 \begin{lstlisting}[language=TeX]
-\begin{exercise}[Titolo]
+\begin{exercise}{Titolo}
 Testo dell'esercizio...
 \end{exercise}
 \end{lstlisting}
@@ -470,7 +489,7 @@ Testo dell'esercizio...
 
 \section{Suggerimenti}
 
-\begin{note}[Best Practices]
+\begin{note}{Best Practices}
 \begin{enumerate}
     \item \textbf{Consistenza}: Usa sempre lo stesso ambiente per lo stesso 
     tipo di contenuto
@@ -483,7 +502,7 @@ Testo dell'esercizio...
 \end{enumerate}
 \end{note}
 
-\begin{warning}[Errori Comuni]
+\begin{warning}{Errori Comuni}
 \begin{itemize}
     \item Non dimenticare di compilare due volte per aggiornare i riferimenti
     \item Usa sempre \code{\textbackslash(...\textbackslash)} invece di 

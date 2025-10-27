@@ -150,6 +150,28 @@
   [\titlerule]
 	\titlespacing*{\chapter}{0pt}{-10pt}{20pt}
 
+% =============================================================================
+% CLEVER-REFERENCE NAMES CONFIGURATION
+% =============================================================================
+\crefname{theorem}{teorema}{teoremi}
+\Crefname{theorem}{Teorema}{Teoremi}
+\crefname{corollary}{corollario}{corollari}
+\Crefname{corollary}{Corollario}{Corollari}
+\crefname{lemma}{lemma}{lemmi}
+\Crefname{lemma}{Lemma}{Lemmi}
+\crefname{proposition}{proposizione}{proposizioni}
+\Crefname{proposition}{Proposizione}{Proposizioni}
+\crefname{definition}{definizione}{definizioni}
+\Crefname{definition}{Definizione}{Definizioni}
+\crefname{example}{esempio}{esempi}
+\Crefname{example}{Esempio}{Esempi}
+\crefname{note}{nota}{note}
+\Crefname{note}{Nota}{Note}
+\crefname{warning}{attenzione}{attenzioni}
+\Crefname{warning}{Attenzione}{Attenzioni}
+\crefname{algorithm}{algoritmo}{algoritmi}
+\Crefname{algorithm}{Algoritmo}{Algoritmi}
+
 % Ensure chapter titles are used for the header (\leftmark)
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
@@ -270,104 +292,76 @@
 }
 
 % Definition environment
-\newtcolorbox[auto counter, number within=section]{definitionbox}[2][]{
+\newtcolorbox[auto counter, number within=section]{definition}[2][]{
     theorembox=defcolor,
     title={Definizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    label type=definition,
     #1
 }
-
-\newenvironment{definition}[1][]
-  {\begin{definitionbox}{#1}}
-  {\end{definitionbox}}
 
 % Theorem environment
-\newtcolorbox[auto counter, number within=section]{theorembox}[2][]{
+\newtcolorbox[auto counter, number within=section]{theorem}[2][]{
     theorembox=thmcolor,
     title={Teorema~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    label type=theorem,
     #1
 }
-
-\newenvironment{theorem}[1][]
-  {\begin{theorembox}{#1}}
-  {\end{theorembox}}
 
 % Lemma environment
-\newtcolorbox[auto counter, number within=section]{lemmabox}[2][]{
+\newtcolorbox[auto counter, number within=section]{lemma}[2][]{
     theorembox=lemcolor,
     title={Lemma~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    label type=lemma,
     #1
 }
-
-\newenvironment{lemma}[1][]
-  {\begin{lemmabox}{#1}}
-  {\end{lemmabox}}
 
 % Proposition environment
-\newtcolorbox[auto counter, number within=section]{propositionbox}[2][]{
+\newtcolorbox[auto counter, number within=section]{proposition}[2][]{
     theorembox=propcolor,
     title={Proposizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    label type=proposition,
     #1
 }
-
-\newenvironment{proposition}[1][]
-  {\begin{propositionbox}{#1}}
-  {\end{propositionbox}}
 
 % Corollary environment
-\newtcolorbox[auto counter, number within=section]{corollarybox}[2][]{
+\newtcolorbox[auto counter, number within=section]{corollary}[2][]{
     theorembox=corcolor,
     title={Corollario~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    label type=corollary,
     #1
 }
-
-\newenvironment{corollary}[1][]
-  {\begin{corollarybox}{#1}}
-  {\end{corollarybox}}
 
 % Example environment
-\newtcolorbox[auto counter, number within=section]{examplebox}[2][]{
+\newtcolorbox[auto counter, number within=section]{example}[2][]{
     theorembox=excolor,
     title={Esempio~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    label type=example,
     #1
-}
-
-\newenvironment{example}[1][]
-  {\begin{examplebox}{#1}}
-  {\end{examplebox}}
+}  
 
 % Note environment
-\newtcolorbox[auto counter, number within=section]{notebox}[2][]{
+\newtcolorbox[auto counter, number within=section]{note}[2][]{
     theorembox=notecolor,
     title={Nota~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    label type=note,
     #1
 }
-
-\newenvironment{note}[1][]
-  {\begin{notebox}{#1}}
-  {\end{notebox}}
 
 % Warning/Alert environment
-\newtcolorbox[auto counter, number within=section]{warningbox}[2][]{
+\newtcolorbox[auto counter, number within=section]{warning}[2][]{
     theorembox=warncolor,
     title={Attenzione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    label type=warning,
     #1
 }
-
-\newenvironment{warning}[1][]
-  {\begin{warningbox}{#1}}
-  {\end{warningbox}}
 
 % Algorithm environment
-\newtcolorbox[auto counter, number within=section]{algorithmbox}[2][]{
+\newtcolorbox[auto counter, number within=section]{algorithmdesc}[2][]{
     theorembox=algocolor,
     title={Algoritmo~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    label type=algorithm,
     #1
 }
-
-\newenvironment{algorithmdesc}[1][]
-  {\begin{algorithmbox}{#1}}
-  {\end{algorithmbox}}
-
 % Customized proof environment
 \renewenvironment{proof}[1][Dimostrazione]
   {\par\vspace{10pt}\noindent\textbf{\color{csblue}#1.}\ \itshape\phantomsection}
@@ -407,11 +401,11 @@
 \newcommand{\st}{:\;} % such that
 
 % Improved cross-reference names
-\crefname{section}{Sezione}{Sezioni}
-\crefname{subsection}{Sottosezione}{Sottosezioni}
-\crefname{figure}{Figura}{Figure}
-\crefname{table}{Tabella}{Tabelle}
-\crefname{equation}{Equazione}{Equazioni}
+\Crefname{section}{Sezione}{Sezioni}
+\Crefname{subsection}{Sottosezione}{Sottosezioni}
+\Crefname{figure}{Figura}{Figure}
+\Crefname{table}{Tabella}{Tabelle}
+\Crefname{equation}{Equazione}{Equazioni}
 
 % =============================================================================
 % TITLE PAGE
