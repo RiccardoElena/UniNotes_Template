@@ -22,7 +22,8 @@
 % Encoding and language
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
-\RequirePackage[italian,english]{babel}
+\RequirePackage[english,italian]{babel}
+\RequirePackage[italian]{datetime2}
 
 % Mathematics
 \RequirePackage{amsmath}
@@ -36,9 +37,11 @@
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
 \usetikzlibrary{cd}
+\usetikzlibrary{shapes.geometric}
 \RequirePackage{tcolorbox}
 \RequirePackage{etoolbox}
 \tcbuselibrary{most}
+
 
 % Layout and geometry
 \RequirePackage[margin=2.5cm, top=3cm, bottom=3cm]{geometry}
@@ -73,6 +76,30 @@
 \RequirePackage{listings}
 \RequirePackage{algorithm}
 \RequirePackage{algpseudocode}
+
+% =============================================================================
+% GRAPHICS CONFIGURATION
+% =============================================================================
+
+\graphicspath{ {_files/} }
+
+
+% =============================================================================
+% CUSTOM SYMBOLS
+% =============================================================================
+
+% warning symbol (yellow triangle with exclamation mark)
+\newcommand{\warningsymbol}{%
+    \raisebox{-0.15ex}{\tikz[baseline=-0.5ex]\node[draw=yellow!70!black,fill=yellow!30,regular polygon,regular polygon sides=3,inner sep=0.8pt,line width=0.6pt,minimum size=0.9em]{%
+        \textnormal{\textbf{\textcolor{yellow!70!black}{\tiny !}}}%
+    };}%
+}
+% Info symbol (blue circle with i)
+\newcommand{\infosymbol}{%
+    \raisebox{-0.15ex}{\tikz[baseline=-1ex]\node[draw=blue!70,fill=blue!10,circle,inner sep=1.5pt,line width=0.8pt,minimum size=1.2em]{%
+        \textnormal{\textbf{\textcolor{blue!70}{\footnotesize i}}}%
+    };}%
+}
 
 % =============================================================================
 % COLOR DEFINITIONS
@@ -171,6 +198,22 @@
 \Crefname{warning}{Attenzione}{Attenzioni}
 \crefname{algorithm}{algoritmo}{algoritmi}
 \Crefname{algorithm}{Algoritmo}{Algoritmi}
+\crefname{chapter}{capitolo}{capitoli}
+\Crefname{chapter}{Capitolo}{Capitoli}
+\crefname{section}{sezione}{sezioni}
+\Crefname{section}{Sezione}{Sezioni}
+\crefname{subsection}{sottosezione}{sottosezioni}
+\Crefname{subsection}{Sottosezione}{Sottosezioni}
+\crefname{figure}{figura}{figure}
+\Crefname{figure}{Figura}{Figure}
+\crefname{table}{tabella}{tabelle}
+\Crefname{table}{Tabella}{Tabelle}
+\crefname{equation}{equazione}{equazioni}
+\Crefname{equation}{Equazione}{Equazioni}
+
+
+\newcommand{\crefalt}[2][black]{{\hypersetup{linkcolor={#1}}\cref{#2}}}
+\newcommand{\Crefalt}[2][black]{{\hypersetup{linkcolor={#1}}\Cref{#2}}}
 
 % Ensure chapter titles are used for the header (\leftmark)
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
@@ -400,13 +443,6 @@
 }
 \newcommand{\st}{:\;} % such that
 
-% Improved cross-reference names
-\Crefname{section}{Sezione}{Sezioni}
-\Crefname{subsection}{Sottosezione}{Sottosezioni}
-\Crefname{figure}{Figura}{Figure}
-\Crefname{table}{Tabella}{Tabelle}
-\Crefname{equation}{Equazione}{Equazioni}
-
 % =============================================================================
 % TITLE PAGE
 % =============================================================================
@@ -425,42 +461,73 @@
 \newcommand{\academicyear}[1]{\renewcommand{\@academicyear}{#1}}
 
 % Command to create the title page
+% filepath: /Users/riccardoelena/Desktop/Università/Magistrale/Primo_Anno/E_E/Notes/csnotes.cls
+% Command to create the title page
 \newcommand{\maketitlepage}{
     \begin{titlepage}
-        \begin{center}
-            \vspace*{1cm}
+        % --- Disegno della Barra Laterale con TikZ ---
+        \begin{tikzpicture}[remember picture, overlay]
+            % Barra laterale blu
+            \fill[csblue] 
+                (current page.south west) rectangle 
+                ([xshift=5cm]current page.north west);
             
-            % University logo (optional)
-            % \includegraphics[width=0.3\textwidth]{logo}
+            % Logo di sfondo in trasparenza (centrato nell'area bianca)
+            \node[opacity=0.08, inner sep=0pt] at ([xshift=2.75cm]current page.center) {
+                \includegraphics[width=15cm]{_images/logo}
+            };
+        \end{tikzpicture}
+
+        \vspace*{-.5cm}
+        \enlargethispage{1cm}
+        
+        % --- Intestazione (Allineata a Destra) ---
+        \begin{minipage}[t]{\dimexpr\textwidth\relax}
+          \begin{flushright}
+              %\vspace*{0.2cm} % Spazio dall'alto
+              
+              {\Large\textsc{\@university}}\\[0.2cm]
+              {\normalsize\textsc{\@department}}\\[0.1cm]
+              {\normalsize\textsc{\@course}}
+              
+              \null\hfill\rule{0.7\linewidth}{1pt} % Linea di separazione
+          \end{flushright}
+        \end{minipage}
+        
+        
+        \vfill % Spazio centrale
+        
+        % --- Titolo Principale (Allineato a Sinistra nell'area bianca) ---
+        \hspace*{5.5cm} 
+        \begin{minipage}[t]{\dimexpr\textwidth-5.5cm\relax}
+            \begin{flushleft}
+                {\Large Appunti del corso di}\\[0.5cm]
+                {\Huge\bfseries\color{black!80}\@subject}\\[0.2cm]
+                
+                \vspace{0.1cm}
+                % Sezione di rinforzo del titolo
+                \rule{0.6\textwidth}{3pt} % Linea spessa che sottolinea il titolo
+                \vspace{0.1cm}
+            \end{flushleft}
+        \end{minipage}
+
+        \vfill % Spinge il resto del contenuto in basso
+        
+        % --- Metadati (Studente, Data, Anno Accademico) ---
+        \hspace*{5.5cm} 
+        \begin{minipage}[b]{\dimexpr\textwidth-5.5cm\relax}
             
-            \vspace{1cm}
-            
-            {\Large\textsc{\@university}}\\[0.3cm]
-            {\large\textsc{\@department}}\\[0.2cm]
-            {\large\textsc{\@course}}
-            
-            \vspace{2cm}
-            
-            \rule{\textwidth}{1.5pt}\\[0.5cm]
-            {\Huge\bfseries\color{csblue}\@title}\\[0.3cm]
-            \rule{\textwidth}{1.5pt}
-            
-            \vspace{1.5cm}
-            
-            {\Large Appunti del corso di}\\[0.3cm]
-            {\LARGE\textbf{\@subject}}
-            
-            \vfill
-            
-            \begin{minipage}{0.4\textwidth}
+            % Studente a Sinistra
+            \begin{minipage}{0.4\linewidth}
                 \begin{flushleft}
                     \large
-                    \textbf{Studente:}\\
+                    \textbf{Studenti:}\\
                     \@author
                 \end{flushleft}
             \end{minipage}
             \hfill
-            \begin{minipage}{0.4\textwidth}
+            % Data a Destra
+            \begin{minipage}{0.4\linewidth}
                 \begin{flushright}
                     \large
                     \textbf{Data:}\\
@@ -468,12 +535,67 @@
                 \end{flushright}
             \end{minipage}
             
-            \vspace{1cm}
+            \vspace{2cm}
             
-            {\large\@academicyear}
+            % Anno Accademico al Centro (dell'area bianca)
+            \begin{center}
+                {\large\@academicyear}
+            \end{center}
             
-        \end{center}
+            \vspace{1cm} % Margine finale
+        \end{minipage}
+        
     \end{titlepage}
+}
+
+% filepath: /Users/riccardoelena/Desktop/Università/Magistrale/Primo_Anno/E_E/Notes/csnotes.cls
+
+% Command to create the back cover page
+\newcommand{\makebackcover}{
+    \clearpage
+    \thispagestyle{empty}
+    \begin{tikzpicture}[remember picture, overlay]
+        % Barra laterale blu (identica alla copertina)
+        \fill[csblue] 
+            (current page.south west) rectangle 
+            ([xshift=5cm]current page.north west);
+        
+        % Logo di sfondo in trasparenza (opzionale, centrato nell'area bianca)
+        \node[opacity=0.05, inner sep=0pt] at ([xshift=2.75cm]current page.center) {
+            \includegraphics[width=15cm]{_images/logo}
+        };
+    \end{tikzpicture}
+    
+    \vspace*{-2cm}
+    \enlargethispage{2cm}
+    
+    % Contenuto della quarta di copertina (opzionale)
+    \noindent\hspace*{5.5cm}%
+    \begin{minipage}[c][\textheight][c]{\dimexpr\textwidth-6cm\relax}
+        \begin{center}
+            \vfill
+            
+            % Puoi aggiungere qui informazioni come:
+            % - Ringraziamenti
+            % - Note aggiuntive
+            % - Informazioni di contatto
+            % - O lasciare vuoto per una pagina pulita
+            
+            {\large\textit{Fine degli appunti}}
+            
+            \vspace{2cm}
+            
+            {\normalsize
+            Questi appunti sono stati redatti durante\\
+            l'anno accademico \@academicyear\\[1cm]
+            presso \@university
+            }
+            
+            \vfill
+        \end{center}
+    \end{minipage}
+    
+    \clearpage
 }
 
 % =============================================================================

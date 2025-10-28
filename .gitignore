@@ -13,6 +13,7 @@
 *.lof
 *.lot
 *.pdf
+!_files/**/*
 
 # BibTeX/BibLaTeX temporary files
 *.bbl
