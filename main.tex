@@ -60,8 +60,13 @@ Usa l'ambiente \code{example} per esempi pratici e casi d'uso.
 Colore: Teal
 \end{example}
 
+\begin{observation}{Titolo Nota (opzionale)}
+Usa l'ambiente \code{observation} per le osservazioni riguardo argomenti specifici.
+Colore: Giallo
+\end{observation}
+
 \begin{note}{Titolo Nota (opzionale)}
-Usa l'ambiente \code{note} per note e osservazioni importanti.
+Usa l'ambiente \code{note} per note del redattore e approfondimenti.
 Colore: Giallo
 \end{note}
 
@@ -129,6 +134,40 @@ Usa i comandi dedicati per le notazioni asintotiche:
     \item \code{\textbackslash{}BigTheta\{n\^{}2\}} produce: \(\BigTheta{n^2}\)
 \end{itemize}
 \end{example}
+
+\subsection{Simboli per avvertimenti}
+
+Sono disponibili comandi per inserire simboli di attenzione e avviso nel testo:
+\begin{itemize}
+    \item \code{\textbackslash{}warningsymbol} produce: \warningsymbol
+    \item \code{\textbackslash{}infosymbol} produce: \infosymbol
+\end{itemize}
+
+\subsection{Comandi matematici}
+
+Sono definiti comandi per insiemi numerici comuni:
+\begin{itemize}
+    \item \code{\textbackslash{}N} produce: \(\N\)
+    \item \code{\textbackslash{}Z} produce: \(\Z\)
+    \item \code{\textbackslash{}Q} produce: \(\Q\)
+    \item \code{\textbackslash{}R} produce: \(\R\)
+    \item \code{\textbackslash{}C} produce: \(\C\)
+\end{itemize}
+
+Tra le varie utily, sono presenti anche:
+\begin{itemize}
+    \item \code{\textbackslash{}abs\{x\}} produce: \(\abs{x}\)
+    \item \code{\textbackslash{}set\{x\}[condition]} produce: \(\set{x}[condition]\)
+    \item \code{\textbackslash{}st} produce: \(\st\)
+\end{itemize}
+
+\subsection{Altro}
+
+Altri comandi utili inseriti includono:
+\begin{itemize}
+    \item \code{\textbackslash{}q{text}} per virgolette tipografiche: \q{text}
+    \item \code{\textbackslash{}qi{text}} per virgolette tipografiche in corsivo: \qi{text}
+\end{itemize}
 
 % =============================================================================
 % CODICE
