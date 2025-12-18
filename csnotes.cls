@@ -30,16 +30,14 @@
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
 \RequirePackage{mathtools}
+\RequirePackage{centernot}
 
 % Graphics and colors
 \RequirePackage{graphicx}
 \RequirePackage[dvipsnames,svgnames,x11names]{xcolor}
 \RequirePackage{forest}
 \RequirePackage{tikz}
-\usetikzlibrary{trees,positioning,arrows.meta}
-\usetikzlibrary{calc}
-\usetikzlibrary{cd}
-\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{trees,positioning,arrows.meta,calc,cd,shapes.geometric,shapes.symbols}
 \RequirePackage{tcolorbox}
 \RequirePackage{etoolbox}
 \tcbuselibrary{most}
@@ -102,7 +100,46 @@
         \textnormal{\textbf{\textcolor{blue!70}{\footnotesize i}}}%
     };}%
 }
+% Extra/Verified symbol (book)
+\newcommand{\extrasymbol}{%
+    \raisebox{-0.15ex}{%
+        \begin{tikzpicture}[baseline=-0.1ex, scale=0.3]
+            % Pagina sinistra
+            \fill[csgreen!20] (0,0) -- (0.6,0.1) -- (0.6,1.3) -- (0,1.4) -- cycle;
+            \draw[csgreen!70, line width=0.3pt] (0,0) -- (0.6,0.1);
+            \draw[csgreen!70, line width=0.3pt] (0,1.4) -- (0.6,1.3);
+            \draw[csgreen!70, line width=0.3pt] (0,0) -- (0,1.4);
 
+            \fill[csgreen!5] (0.05,0.1) -- (0.6,0.2) -- (0.6,1.2) -- (0.05,1.3) -- cycle;
+            \draw[csgreen!70, line width=0.3pt] (0.1,0.1) -- (0.6,0.2);
+            \draw[csgreen!70, line width=0.3pt] (0.1,1.3) -- (0.6,1.2);
+            \draw[csgreen!70, line width=0.3pt] (0.1,0.1) -- (0.1,1.3);
+
+            \draw[csgreen!70, line width=0.3pt] (0.05,0.1) -- (0.6,0.2);
+            \draw[csgreen!70, line width=0.3pt] (0.05,1.3) -- (0.6,1.2);
+            \draw[csgreen!70, line width=0.3pt] (0.05,0.1) -- (0.05,1.3);
+            % Pagina destra
+            \fill[csgreen!20] (0.6,0.1) -- (1.2,0) -- (1.2,1.4) -- (0.6,1.3) -- cycle;
+            \draw[csgreen!70, line width=0.3pt] (0.6,0.1) -- (1.2,0);
+            \draw[csgreen!70, line width=0.3pt] (1.2,0) -- (1.2,1.4);
+            \draw[csgreen!70, line width=0.3pt] (1.2,1.4) -- (0.6,1.3);
+
+            
+            \fill[csgreen!5] (0.6,0.2) -- (1.13,0.1) -- (1.13,1.3) -- (0.6,1.2) -- cycle;
+            \draw[csgreen!70, line width=0.3pt] (0.6,0.2) -- (1.1,0.1);
+            \draw[csgreen!70, line width=0.3pt] (1.1,0.1) -- (1.1,1.3);
+            \draw[csgreen!70, line width=0.3pt] (1.1,1.3) -- (0.6,1.2);
+            
+            \draw[csgreen!70, line width=0.3pt] (0.6,0.2) -- (1.13,0.1);
+            \draw[csgreen!70, line width=0.3pt] (1.13,0.1) -- (1.13,1.3);
+            \draw[csgreen!70, line width=0.3pt] (1.13,1.3) -- (0.6,1.2);
+            % Piega centrale
+            \draw[csgreen!20, line width=0.4pt] (0.6,0.2) -- (0.6,1.2);
+            % Segno (checkmark piccolo)
+            \node[csgreen!70, scale=0.7] at (0.6,0.7) {\tiny\textit{\textbf{+}}};
+        \end{tikzpicture}%
+    }%
+}
 % =============================================================================
 % COLOR DEFINITIONS
 % =============================================================================
