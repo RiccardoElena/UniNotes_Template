@@ -256,6 +256,48 @@
 \newcommand{\crefalt}[2][black]{{\hypersetup{linkcolor={#1}}\cref{#2}}}
 \newcommand{\Crefalt}[2][black]{{\hypersetup{linkcolor={#1}}\Cref{#2}}}
 
+% =============================================================================
+% NAMED REFERENCE SYSTEM
+% =============================================================================
+
+% Storage per i nomi degli ambienti (label -> nome)
+\ExplSyntaxOn
+\prop_new:N \g_envnames_prop
+
+% Comando per salvare label+nome
+\NewDocumentCommand{\savelabelname}{m m}{
+    \tl_if_empty:nF {#2} {
+        \prop_gput:Nnn \g_envnames_prop {#1} {#2}
+    }
+}
+
+% Comando per recuperare il nome
+\NewDocumentCommand{\getlabelname}{m}{
+    \prop_if_in:NnTF \g_envnames_prop {#1}
+        { ~ (\prop_item:Nn \g_envnames_prop {#1})}
+        {}
+}
+
+% Comandi specializzati per reference con nome
+% Usare questi al posto di \Cref e \cref quando si vuole includere il nome
+\NewDocumentCommand{\Namedcref}{m}{
+    \cref{#1}\getlabelname{#1}
+}
+
+\NewDocumentCommand{\Namedref}{m}{
+    \Cref{#1}\getlabelname{#1}
+}
+
+\ExplSyntaxOff
+
+% Chiave personalizzata per tcolorbox: salva label e nome insieme
+\tcbset{
+    namedlabel/.code 2 args={
+        \tcbset{label={#1}}
+        \savelabelname{#1}{#2}
+    }
+}
+
 % Ensure chapter titles are used for the header (\leftmark)
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
