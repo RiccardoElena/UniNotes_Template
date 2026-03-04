@@ -36,6 +36,7 @@
 
 # Build directory
 build/
+*.sh
 
 # others
 raw/**

@@ -308,6 +308,13 @@
 \newcommand{\abstracttitle}{Scopo del documento}
 \newcommand{\setabstracttitle}[1]{\renewcommand{\abstracttitle}{#1}}
 
+\newcommand{\whitepage}{
+  \newpage
+  \thispagestyle{empty}
+  \mbox{}
+  \newpage
+}
+
 \renewenvironment{abstract}
   {%
    % ensure abstract sits on its own page and is vertically centered
@@ -728,7 +735,6 @@
 % TODOs 
 % ==========================
 \RequirePackage[
-  disable,
   colorinlistoftodos,
   prependcaption,
   textsize=small
