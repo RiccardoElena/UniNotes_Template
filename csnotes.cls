@@ -264,10 +264,18 @@
 \ExplSyntaxOn
 \prop_new:N \g_envnames_prop
 
+% Comando interno richiamato sia a runtime sia dal file .aux
+\NewDocumentCommand{\csnotesstorelabelname}{m m}{
+    \prop_gput:Nnn \g_envnames_prop {#1} {#2}
+}
+
 % Comando per salvare label+nome
 \NewDocumentCommand{\savelabelname}{m m}{
     \tl_if_empty:nF {#2} {
-        \prop_gput:Nnn \g_envnames_prop {#1} {#2}
+        \csnotesstorelabelname{#1}{#2}
+        \protected@write\@auxout{}{
+            \string\csnotesstorelabelname{#1}{#2}
+        }
     }
 }
 
@@ -275,7 +283,7 @@
 \NewDocumentCommand{\getlabelname}{m}{
     \prop_if_in:NnTF \g_envnames_prop {#1}
         { ~ (\prop_item:Nn \g_envnames_prop {#1})}
-        {}
+        { ~ (\nameref*{#1})}
 }
 
 % Comandi specializzati per reference con nome
@@ -286,6 +294,17 @@
 
 \NewDocumentCommand{\Namedref}{m}{
     \Cref{#1}\getlabelname{#1}
+}
+
+\NewDocumentCommand{\Namedonly}{m}{
+    \prop_if_in:NnTF \g_envnames_prop {#1}
+        {\prop_item:Nn \g_envnames_prop {#1}}
+        {\nameref*{#1}}
+}
+\NewDocumentCommand{\Namedonlyhref}{m}{
+    \prop_if_in:NnTF \g_envnames_prop {#1}
+        {\hyperref[#1]{\prop_item:Nn \g_envnames_prop {#1}}}
+        {\nameref{#1}}
 }
 
 \ExplSyntaxOff
