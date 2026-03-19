@@ -6,7 +6,7 @@ on:
       pdf_name:
         required: true
         type: string
-        description: "The desired name of the output PDF (without the .pdf extension)"
+        description: 'The desired name of the output PDF (without the .pdf extension)'
 
 jobs:
   build_and_release:
@@ -38,7 +38,7 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: main.tex 
+          root_file: main.tex
 
       - name: Rename PDF
         run: mv main.pdf ${{ inputs.pdf_name }}.pdf
@@ -48,12 +48,12 @@ jobs:
         run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
       - name: Create New Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v2.6.1
         with:
-          tag_name: "v${{ steps.date.outputs.today }}.${{ github.run_number }}"
-          name: "${{ inputs.pdf_name }} Update - ${{ steps.date.outputs.today }}"
+          tag_name: 'v${{ steps.date.outputs.today }}.${{ github.run_number }}'
+          name: '${{ inputs.pdf_name }} Update - ${{ steps.date.outputs.today }}'
 
-          body: "Automated compile from commit ${{ github.sha }}"
+          body: 'Automated compile from commit ${{ github.sha }}'
           files: ${{ inputs.pdf_name }}.pdf
 
           make_latest: true
