@@ -20,7 +20,7 @@ jobs:
       - name: Restrict compilation to numbered chapters
         shell: bash
         run: |
-          files=$(find _chapters -maxdepth 1 -type f -name '[0-9]*.tex' -printf '%f\n' | sort | sed 's/\.tex$//' | paste -sd, -)
+          files=$(find _chapters -maxdepth 1 -type f -name '[0-9]*.tex' -printf '%f\n' | sort | sed 's/\.tex$//' | sed 's|^|_chapters/|' | paste -sd, -)
 
           if [ -z "$files" ]; then
             echo "No numbered chapter files found in _chapters; main.tex will be compiled as-is."
