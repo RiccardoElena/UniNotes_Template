@@ -17,6 +17,24 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Restrict compilation to numbered chapters
+        shell: bash
+        run: |
+          files=$(find _chapters -maxdepth 1 -type f -name '[0-9]*.tex' -printf '%f\n' | sort | sed 's/\.tex$//' | paste -sd, -)
+
+          if [ -z "$files" ]; then
+            echo "No numbered chapter files found in _chapters; main.tex will be compiled as-is."
+            exit 0
+          fi
+
+          {
+            printf '\\includeonly{%s}\n' "$files"
+            cat main.tex
+          } > main.ci.tex
+
+          mv main.ci.tex main.tex
+          echo "Applied includeonly for chapters: $files"
+
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
         with:
