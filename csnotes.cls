@@ -28,6 +28,7 @@
 % Mathematics
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
+\RequirePackage{proof}
 \RequirePackage{amsthm}
 \RequirePackage{mathtools}
 \RequirePackage{centernot}
