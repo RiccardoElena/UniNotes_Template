@@ -29,6 +29,7 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{proof}
+\RequirePackage{bussproofs}
 \RequirePackage{amsthm}
 \RequirePackage{mathtools}
 \RequirePackage{centernot}
@@ -580,6 +581,9 @@
     {\left\{\,#1\,\middle|\,#2\,\right\}} % With condition
 }
 \newcommand{\st}{:\;} % such that
+
+% Command for proof rule labels (automatically wraps in parentheses and math mode)
+\newcommand{\RuleLabel}[1]{\RightLabel{(#1)}}
 
 % =============================================================================
 % TITLE PAGE
