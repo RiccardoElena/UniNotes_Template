@@ -583,7 +583,11 @@
 \newcommand{\st}{:\;} % such that
 
 % Command for proof rule labels (automatically wraps in parentheses and math mode)
-\newcommand{\RuleLabel}[1]{\RightLabel{(#1)}}
+\NewDocumentCommand{\RuleLabel}{m o}{
+  \IfNoValueTF{#2}
+    {\RightLabel{(#1)}}
+    {\RightLabel{(#1), \pool{#2}}}
+}
 
 % =============================================================================
 % TITLE PAGE
