@@ -39,7 +39,7 @@
 \RequirePackage[dvipsnames,svgnames,x11names]{xcolor}
 \RequirePackage{forest}
 \RequirePackage{tikz}
-\usetikzlibrary{trees,positioning,arrows.meta,calc,cd,shapes.geometric,shapes.symbols}
+\usetikzlibrary{automata,trees,positioning,arrows.meta,calc,cd,shapes.geometric,shapes.symbols}
 \RequirePackage{tcolorbox}
 \RequirePackage{etoolbox}
 \tcbuselibrary{most}
