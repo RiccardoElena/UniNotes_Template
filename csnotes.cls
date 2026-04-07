@@ -32,6 +32,7 @@
 \RequirePackage{proof}
 \RequirePackage{amsthm}
 \RequirePackage{mathtools}
+\RequirePackage{stmaryrd}
 \RequirePackage{centernot}
 
 % Graphics and colors
