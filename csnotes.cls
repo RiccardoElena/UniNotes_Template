@@ -43,7 +43,7 @@
 \usetikzlibrary{automata,trees,positioning,arrows.meta,calc,cd,shapes.geometric,shapes.symbols}
 \RequirePackage{tcolorbox}
 \RequirePackage{etoolbox}
-\tcbuselibrary{most}
+\tcbuselibrary{most,theorems}
 
 
 % Layout and geometry
@@ -470,6 +470,7 @@
 \newtcolorbox[auto counter, number within=section]{definition}[2][]{
     theorembox=defcolor,
     title={Definizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{definition}{\protect\numberline{\thetcbcounter}Definizione\ifstrempty{#2}{}{:\ #2}}},
     label type=definition,
     #1
 }
@@ -478,6 +479,7 @@
 \newtcolorbox[auto counter, number within=section]{theorem}[2][]{
     theorembox=thmcolor,
     title={Teorema~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{theorem}{\protect\numberline{\thetcbcounter}Teorema\ifstrempty{#2}{}{:\ #2}}},
     label type=theorem,
     #1
 }
@@ -486,6 +488,7 @@
 \newtcolorbox[auto counter, number within=section]{lemma}[2][]{
     theorembox=lemcolor,
     title={Lemma~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{lemma}{\protect\numberline{\thetcbcounter}Lemma\ifstrempty{#2}{}{:\ #2}}},
     label type=lemma,
     #1
 }
@@ -494,6 +497,7 @@
 \newtcolorbox[auto counter, number within=section]{proposition}[2][]{
     theorembox=propcolor,
     title={Proposizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{proposition}{\protect\numberline{\thetcbcounter}Proposizione\ifstrempty{#2}{}{:\ #2}}},
     label type=proposition,
     #1
 }
@@ -502,6 +506,7 @@
 \newtcolorbox[auto counter, number within=section]{corollary}[2][]{
     theorembox=corcolor,
     title={Corollario~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{corollary}{\protect\numberline{\thetcbcounter}Corollario\ifstrempty{#2}{}{:\ #2}}},
     label type=corollary,
     #1
 }
@@ -510,11 +515,12 @@
 \newtcolorbox[auto counter, number within=section]{example}[2][]{
     theorembox=excolor,
     title={Esempio~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{ex.toc}{example}{\protect\numberline{\thetcbcounter}Esempio\ifstrempty{#2}{}{:\ #2}}},
     label type=example,
     #1
 }  
 
-% Note environment
+% Note environment (NO INDEX)
 \newtcolorbox[auto counter, number within=section]{note}[2][]{
     theoremboxwhite=notecolor,
     title={\infosymbol{}  Nota~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
@@ -530,7 +536,7 @@
     #1
 }
 
-% Warning/Alert environment
+% Warning/Alert environment (NO INDEX)
 \newtcolorbox[auto counter, number within=section]{warning}[2][]{
     theorembox=warncolor,
     title={Attenzione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
@@ -542,6 +548,7 @@
 \newtcolorbox[auto counter, number within=section]{algorithmdesc}[2][]{
     theorembox=algocolor,
     title={Algoritmo~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{algo.toc}{algorithmdesc}{\protect\numberline{\thetcbcounter}Algoritmo\ifstrempty{#2}{}{:\ #2}}},
     label type=algorithm,
     #1
 }
@@ -772,6 +779,29 @@
 \newcommand{\TODO}[1]{\todo[color=warncolor!40]{#1}}         % margin
 \newcommand{\TODOinline}[1]{\todo[inline,color=warncolor!20]{#1}} % inline
 \newcommand{\FIXME}[1]{\todo[color=csyellow!45]{#1}}
+
+% THEOREM INDEX (LIST) SUPPORT
+% Tre indici separati: riepilogo (definizioni, teoremi, lemmi, proposizioni, corollari),
+% esempi, e algoritmi. Note/Osservazioni/Avvertimenti esclusi.
+\makeatletter
+\newcommand{\listtheoremname}{Indice di teoremi e definizioni}
+\newcommand{\listexamplename}{Indice degli esempi}
+\newcommand{\listalgoname}{Indice degli algoritmi}
+
+% Macro di display per i tre file .toc
+\newcommand{\l@definition}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
+\newcommand{\l@theorem}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
+\newcommand{\l@lemma}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
+\newcommand{\l@proposition}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
+\newcommand{\l@corollary}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
+\newcommand{\l@example}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
+\newcommand{\l@algorithmdesc}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
+
+% Tre comandi indice con tre file separati
+\newcommand{\listoftheorems}{\cleardoublepage\section*{\listtheoremname}\@starttoc{thm.toc}}
+\newcommand{\listofexamples}{\cleardoublepage\section*{\listexamplename}\@starttoc{ex.toc}}
+\newcommand{\listofalgos}{\cleardoublepage\section*{\listalgoname}\@starttoc{algo.toc}}
+\makeatother
 
 % =============================================================================
 % END OF CLASS

@@ -3,6 +3,9 @@
 *.log
 *.out
 *.toc
+*.thm.toc
+*.ex.toc
+*.algo.toc
 *.synctex.gz
 *.fdb_latexmk
 *.fls
@@ -12,6 +15,10 @@
 *.run.xml
 *.lof
 *.lot
+*.toc
+*.thm.toc
+*.ex.toc
+*.algo.toc
 *.pdf
 !_files/**/*
 
