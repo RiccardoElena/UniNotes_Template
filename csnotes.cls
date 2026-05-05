@@ -465,12 +465,15 @@
         after skip=15pt plus 2pt,
     }
 }
+\def\csnoteslisttitle{}
+\tcbset{listtitle/.store in=\csnoteslisttitle}
 
 % Definition environment
 \newtcolorbox[auto counter, number within=section]{definition}[2][]{
     theorembox=defcolor,
+    listtitle={#2},
     title={Definizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{definition}{\protect\numberline{\thetcbcounter}Definizione\ifstrempty{#2}{}{:\ #2}}},
+    before upper={\addcontentsline{thm.toc}{definition}{\protect\numberline{\thetcbcounter}Definizione\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=definition,
     #1
 }
@@ -478,8 +481,9 @@
 % Theorem environment
 \newtcolorbox[auto counter, number within=section]{theorem}[2][]{
     theorembox=thmcolor,
+    listtitle={#2},
     title={Teorema~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{theorem}{\protect\numberline{\thetcbcounter}Teorema\ifstrempty{#2}{}{:\ #2}}},
+    before upper={\addcontentsline{thm.toc}{theorem}{\protect\numberline{\thetcbcounter}Teorema\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=theorem,
     #1
 }
@@ -487,8 +491,9 @@
 % Lemma environment
 \newtcolorbox[auto counter, number within=section]{lemma}[2][]{
     theorembox=lemcolor,
+    listtitle={#2},
     title={Lemma~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{lemma}{\protect\numberline{\thetcbcounter}Lemma\ifstrempty{#2}{}{:\ #2}}},
+    before upper={\addcontentsline{thm.toc}{lemma}{\protect\numberline{\thetcbcounter}Lemma\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=lemma,
     #1
 }
@@ -496,8 +501,9 @@
 % Proposition environment
 \newtcolorbox[auto counter, number within=section]{proposition}[2][]{
     theorembox=propcolor,
+    listtitle={#2},
     title={Proposizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{proposition}{\protect\numberline{\thetcbcounter}Proposizione\ifstrempty{#2}{}{:\ #2}}},
+    before upper={\addcontentsline{thm.toc}{proposition}{\protect\numberline{\thetcbcounter}Proposizione\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=proposition,
     #1
 }
@@ -505,8 +511,9 @@
 % Corollary environment
 \newtcolorbox[auto counter, number within=section]{corollary}[2][]{
     theorembox=corcolor,
+    listtitle={#2},
     title={Corollario~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{corollary}{\protect\numberline{\thetcbcounter}Corollario\ifstrempty{#2}{}{:\ #2}}},
+    before upper={\addcontentsline{thm.toc}{corollary}{\protect\numberline{\thetcbcounter}Corollario\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=corollary,
     #1
 }
