@@ -595,14 +595,28 @@
     {\left\{ #1 \right\}} % No condition
     {\left\{\,#1\,\middle|\,#2\,\right\}} % With condition
 }
-\newcommand{\st}{:\;} % such that
+\newcommand{\st}{:} % such that
 
 % Command for proof rule labels (automatically wraps in parentheses and math mode)
+\newcommand{\pool}[1]{\hfill{\footnotesize Scaricabile: #1}}
 \NewDocumentCommand{\RuleLabel}{m o}{
   \IfNoValueTF{#2}
     {\RightLabel{(#1)}}
     {\RightLabel{(#1), \pool{#2}}}
 }
+
+\newcommand{\bpstrut}{\vphantom{\(\forall_p^q\)}}
+
+\let\oldAxiomC\AxiomC
+\let\oldUnaryInfC\UnaryInfC
+\let\oldBinaryInfC\BinaryInfC
+\let\oldTrinaryInfC\TrinaryInfC
+
+\renewcommand{\AxiomC}[1]{\oldAxiomC{\bpstrut #1}}
+\renewcommand{\UnaryInfC}[1]{\oldUnaryInfC{\bpstrut #1}}
+\renewcommand{\BinaryInfC}[1]{\oldBinaryInfC{\bpstrut #1}}
+\renewcommand{\TrinaryInfC}[1]{\oldTrinaryInfC{\bpstrut #1}}
+
 
 % =============================================================================
 % TITLE PAGE
