@@ -242,6 +242,8 @@
 \Crefname{warning}{Attenzione}{Attenzioni}
 \crefname{algorithm}{algoritmo}{algoritmi}
 \Crefname{algorithm}{Algoritmo}{Algoritmi}
+\crefname{appendix}{appendice}{appendici}
+\Crefname{appendix}{Appendice}{Appendici}
 \crefname{chapter}{capitolo}{capitoli}
 \Crefname{chapter}{Capitolo}{Capitoli}
 \crefname{section}{sezione}{sezioni}
