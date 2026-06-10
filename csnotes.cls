@@ -563,7 +563,7 @@
 }
 % Customized proof environment
 \renewenvironment{proof}[1][Dimostrazione]
-  {\par\vspace{10pt}\noindent\textbf{\color{csblue}#1.}\ \itshape\phantomsection}
+    {\par\vspace{10pt}\noindent\textbf{\color{csblue}#1.}\ \normalfont\color{csblue!45!black}\phantomsection\ignorespaces}
   {\hfill$\square$\par\vspace{10pt}}
 
 % =============================================================================
