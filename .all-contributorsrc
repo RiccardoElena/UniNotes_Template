@@ -1,0 +1,36 @@
+{
+  "projectName": "UniNotes_Template",
+  "projectOwner": "RiccardoElena",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "RiccardoElena",
+      "name": "Riccardo Elena",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23059036?v=4",
+      "profile": "https://github.com/RiccardoElena",
+      "contributions": [
+        "content",
+        "doc",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "riccardoregina",
+      "name": "Riccardo Regina",
+      "avatar_url": "https://avatars.githubusercontent.com/u/126416822?v=4",
+      "profile": "https://github.com/riccardoregina",
+      "contributions": [
+        "translation"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true
+}
