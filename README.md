@@ -6,6 +6,7 @@
 
 - [Features](#features)
   - [Color-coded Environments](#color-coded-environments)
+  - [Language Selection](#language-selection)
   - [Other capabilities](#other-capabilities)
 - [Quick Start](#quick-start)
   - [Document Structure](#document-structure)
@@ -43,6 +44,25 @@ The template includes several thematic environments, each with a distinct color:
 - **🟡 Note** (Yellow): For important remarks and observations
 - **🔺 Warning** (Red): For cautions and common pitfalls
 - **⚙️ Algorithm** (Gray-blue): For algorithm descriptions
+
+### Language Selection
+
+The template comes with built-in bilingual support (English and Italian) and
+**defaults to Italian** (for full backward compatibility with existing projects).
+
+All user-facing text is localized based on the class option: `english` or `italian` (default).
+
+To use English, just pass the `english` option to the class:
+
+```latex
+\documentclass[english]{csnotes}
+```
+
+To use Italian (the default), no change is needed:
+
+```latex
+\documentclass{csnotes}
+```
 
 ### Other capabilities
 

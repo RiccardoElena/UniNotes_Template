@@ -9,11 +9,28 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{csnotes}[2025/10/07 Computer Science Notes Class]
 
-% Classe base: usare report per supporto ai \chapter
+% =============================================================================
+% CLASS OPTIONS FOR LANGUAGE SELECTION
+% =============================================================================
+
+\newif\ifcsnotes@english
+\csnotes@englishfalse
+
+\DeclareOption{english}{\csnotes@englishtrue}
+\DeclareOption{italian}{\csnotes@englishfalse}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+\ProcessOptions\relax
+
+\ifcsnotes@english
+  \def\csnotes@lang{english}
+\else
+  \def\csnotes@lang{italian}
+\fi
+
+% Base class
 \LoadClass[a4paper,11pt,openany]{report}
-% Numerazione e TOC
-\setcounter{secnumdepth}{3} % numerazione fino a subsubsection
-\setcounter{tocdepth}{2}    % TOC: mostra fino a subsection
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
 
 % =============================================================================
 % ESSENTIAL PACKAGES
@@ -22,8 +39,8 @@
 % Encoding and language
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
-\RequirePackage[english,italian]{babel}
-\RequirePackage[italian]{datetime2}
+\RequirePackage[main=\csnotes@lang,english,italian]{babel}
+\RequirePackage[\csnotes@lang]{datetime2}
 
 % Mathematics
 \RequirePackage{amsmath}
@@ -107,7 +124,7 @@
 \newcommand{\extrasymbol}{%
     \raisebox{-0.15ex}{%
         \begin{tikzpicture}[baseline=-0.1ex, scale=0.3]
-            % Pagina sinistra
+            % Left page
             \fill[csgreen!20] (0,0) -- (0.6,0.1) -- (0.6,1.3) -- (0,1.4) -- cycle;
             \draw[csgreen!70, line width=0.3pt] (0,0) -- (0.6,0.1);
             \draw[csgreen!70, line width=0.3pt] (0,1.4) -- (0.6,1.3);
@@ -121,7 +138,7 @@
             \draw[csgreen!70, line width=0.3pt] (0.05,0.1) -- (0.6,0.2);
             \draw[csgreen!70, line width=0.3pt] (0.05,1.3) -- (0.6,1.2);
             \draw[csgreen!70, line width=0.3pt] (0.05,0.1) -- (0.05,1.3);
-            % Pagina destra
+            % Right page
             \fill[csgreen!20] (0.6,0.1) -- (1.2,0) -- (1.2,1.4) -- (0.6,1.3) -- cycle;
             \draw[csgreen!70, line width=0.3pt] (0.6,0.1) -- (1.2,0);
             \draw[csgreen!70, line width=0.3pt] (1.2,0) -- (1.2,1.4);
@@ -136,9 +153,9 @@
             \draw[csgreen!70, line width=0.3pt] (0.6,0.2) -- (1.13,0.1);
             \draw[csgreen!70, line width=0.3pt] (1.13,0.1) -- (1.13,1.3);
             \draw[csgreen!70, line width=0.3pt] (1.13,1.3) -- (0.6,1.2);
-            % Piega centrale
+            % Central fold
             \draw[csgreen!20, line width=0.4pt] (0.6,0.2) -- (0.6,1.2);
-            % Segno (checkmark piccolo)
+            % Mark (small checkmark)
             \node[csgreen!70, scale=0.7] at (0.6,0.7) {\tiny\textit{\textbf{+}}};
         \end{tikzpicture}%
     }%
@@ -220,43 +237,270 @@
 	\titlespacing*{\chapter}{0pt}{-10pt}{20pt}
 
 % =============================================================================
-% CLEVER-REFERENCE NAMES CONFIGURATION
+% LOCALIZATION STRINGS
 % =============================================================================
-\crefname{theorem}{teorema}{teoremi}
-\Crefname{theorem}{Teorema}{Teoremi}
-\crefname{corollary}{corollario}{corollari}
-\Crefname{corollary}{Corollario}{Corollari}
-\crefname{lemma}{lemma}{lemmi}
-\Crefname{lemma}{Lemma}{Lemmi}
-\crefname{proposition}{proposizione}{proposizioni}
-\Crefname{proposition}{Proposizione}{Proposizioni}
-\crefname{definition}{definizione}{definizioni}
-\Crefname{definition}{Definizione}{Definizioni}
-\crefname{example}{esempio}{esempi}
-\Crefname{example}{Esempio}{Esempi}
-\crefname{note}{nota}{note}
-\Crefname{note}{Nota}{Note}
-\crefname{observation}{osservazione}{osservazioni}
-\Crefname{observation}{Osservazione}{Osservazioni}
-\crefname{warning}{attenzione}{attenzioni}
-\Crefname{warning}{Attenzione}{Attenzioni}
-\crefname{algorithm}{algoritmo}{algoritmi}
-\Crefname{algorithm}{Algoritmo}{Algoritmi}
-\crefname{appendix}{appendice}{appendici}
-\Crefname{appendix}{Appendice}{Appendici}
-\crefname{chapter}{capitolo}{capitoli}
-\Crefname{chapter}{Capitolo}{Capitoli}
-\crefname{section}{sezione}{sezioni}
-\Crefname{section}{Sezione}{Sezioni}
-\crefname{subsection}{sottosezione}{sottosezioni}
-\Crefname{subsection}{Sottosezione}{Sottosezioni}
-\crefname{figure}{figura}{figure}
-\Crefname{figure}{Figura}{Figure}
-\crefname{table}{tabella}{tabelle}
-\Crefname{table}{Tabella}{Tabelle}
-\crefname{equation}{equazione}{equazioni}
-\Crefname{equation}{Equazione}{Equazioni}
+% Pre-define all strings with Italian defaults for backward compatibility.
+% Babel caption hooks select the localized strings at \begin{document}.
 
+\makeatletter
+
+% --- Italian defaults ---
+\def\csnotes@str@def{Definizione}
+\def\csnotes@str@defs{Definizioni}
+\def\csnotes@str@thm{Teorema}
+\def\csnotes@str@thms{Teoremi}
+\def\csnotes@str@lem{Lemma}
+\def\csnotes@str@lems{Lemmi}
+\def\csnotes@str@prop{Proposizione}
+\def\csnotes@str@props{Proposizioni}
+\def\csnotes@str@cor{Corollario}
+\def\csnotes@str@cors{Corollari}
+\def\csnotes@str@ex{Esempio}
+\def\csnotes@str@exs{Esempi}
+\def\csnotes@str@note{Nota}
+\def\csnotes@str@notes{Note}
+\def\csnotes@str@obs{Osservazione}
+\def\csnotes@str@obss{Osservazioni}
+\def\csnotes@str@warn{Attenzione}
+\def\csnotes@str@warns{Attenzioni}
+\def\csnotes@str@algo{Algoritmo}
+\def\csnotes@str@algos{Algoritmi}
+\def\csnotes@str@appendix{Appendice}
+\def\csnotes@str@appendices{Appendici}
+\def\csnotes@str@chap{Capitolo}
+\def\csnotes@str@chaps{Capitoli}
+\def\csnotes@str@sec{Sezione}
+\def\csnotes@str@secs{Sezioni}
+\def\csnotes@str@subsec{Sottosezione}
+\def\csnotes@str@subsecs{Sottosezioni}
+\def\csnotes@str@fig{Figura}
+\def\csnotes@str@figs{Figure}
+\def\csnotes@str@tab{Tabella}
+\def\csnotes@str@tabs{Tabelle}
+\def\csnotes@str@eq{Equazione}
+\def\csnotes@str@eqs{Equazioni}
+\def\csnotes@str@proof{Dimostrazione}
+\def\csnotes@str@abstract{Scopo del documento}
+\def\csnotes@str@coursetitle{Appunti del corso di}
+\def\csnotes@str@students{Studenti:}
+\def\csnotes@str@date{Data:}
+\def\csnotes@str@endnotes{Fine degli appunti}
+\def\csnotes@str@noteswritten{Questi appunti sono stati redatti durante\\ l'anno accademico}
+\def\csnotes@str@at{presso}
+\def\csnotes@str@listthm{Indice di teoremi e definizioni}
+\def\csnotes@str@listex{Indice degli esempi}
+\def\csnotes@str@listalgo{Indice degli algoritmi}
+\def\csnotes@str@algoname{Scaricabile:}
+\def\csnotes@str@end{fine}
+\def\csnotes@str@do{fai}
+\def\csnotes@str@while{mentre}
+\def\csnotes@str@for{per}
+\def\csnotes@str@if{se}
+\def\csnotes@str@then{allora}
+\def\csnotes@str@else{altrimenti}
+\def\csnotes@str@return{restituisci}
+\def\csnotes@str@function{funzione}
+\def\csnotes@str@procedure{procedura}
+
+% --- Italian babel hook ---
+\addto\captionsitalian{
+  \def\csnotes@str@def{Definizione}
+  \def\csnotes@str@defs{Definizioni}
+  \def\csnotes@str@thm{Teorema}
+  \def\csnotes@str@thms{Teoremi}
+  \def\csnotes@str@lem{Lemma}
+  \def\csnotes@str@lems{Lemmi}
+  \def\csnotes@str@prop{Proposizione}
+  \def\csnotes@str@props{Proposizioni}
+  \def\csnotes@str@cor{Corollario}
+  \def\csnotes@str@cors{Corollari}
+  \def\csnotes@str@ex{Esempio}
+  \def\csnotes@str@exs{Esempi}
+  \def\csnotes@str@note{Nota}
+  \def\csnotes@str@notes{Note}
+  \def\csnotes@str@obs{Osservazione}
+  \def\csnotes@str@obss{Osservazioni}
+  \def\csnotes@str@warn{Attenzione}
+  \def\csnotes@str@warns{Attenzioni}
+  \def\csnotes@str@algo{Algoritmo}
+  \def\csnotes@str@algos{Algoritmi}
+  \def\csnotes@str@appendix{Appendice}
+  \def\csnotes@str@appendices{Appendici}
+  \def\csnotes@str@chap{Capitolo}
+  \def\csnotes@str@chaps{Capitoli}
+  \def\csnotes@str@sec{Sezione}
+  \def\csnotes@str@secs{Sezioni}
+  \def\csnotes@str@subsec{Sottosezione}
+  \def\csnotes@str@subsecs{Sottosezioni}
+  \def\csnotes@str@fig{Figura}
+  \def\csnotes@str@figs{Figure}
+  \def\csnotes@str@tab{Tabella}
+  \def\csnotes@str@tabs{Tabelle}
+  \def\csnotes@str@eq{Equazione}
+  \def\csnotes@str@eqs{Equazioni}
+  \def\csnotes@str@proof{Dimostrazione}
+  \def\csnotes@str@abstract{Scopo del documento}
+  \def\csnotes@str@coursetitle{Appunti del corso di}
+  \def\csnotes@str@students{Studenti:}
+  \def\csnotes@str@date{Data:}
+  \def\csnotes@str@endnotes{Fine degli appunti}
+  \def\csnotes@str@noteswritten{Questi appunti sono stati redatti durante\\ l'anno accademico}
+  \def\csnotes@str@at{presso}
+  \def\csnotes@str@listthm{Indice di teoremi e definizioni}
+  \def\csnotes@str@listex{Indice degli esempi}
+  \def\csnotes@str@listalgo{Indice degli algoritmi}
+  \def\csnotes@str@algoname{Scaricabile:}
+  \def\csnotes@str@end{fine}
+  \def\csnotes@str@do{fai}
+  \def\csnotes@str@while{mentre}
+  \def\csnotes@str@for{per}
+  \def\csnotes@str@if{se}
+  \def\csnotes@str@then{allora}
+  \def\csnotes@str@else{altrimenti}
+  \def\csnotes@str@return{restituisci}
+  \def\csnotes@str@function{funzione}
+  \def\csnotes@str@procedure{procedura}
+}
+
+% --- English babel hook ---
+\addto\captionsenglish{
+  \def\csnotes@str@def{Definition}
+  \def\csnotes@str@defs{Definitions}
+  \def\csnotes@str@thm{Theorem}
+  \def\csnotes@str@thms{Theorems}
+  \def\csnotes@str@lem{Lemma}
+  \def\csnotes@str@lems{Lemmas}
+  \def\csnotes@str@prop{Proposition}
+  \def\csnotes@str@props{Propositions}
+  \def\csnotes@str@cor{Corollary}
+  \def\csnotes@str@cors{Corollaries}
+  \def\csnotes@str@ex{Example}
+  \def\csnotes@str@exs{Examples}
+  \def\csnotes@str@note{Note}
+  \def\csnotes@str@notes{Notes}
+  \def\csnotes@str@obs{Observation}
+  \def\csnotes@str@obss{Observations}
+  \def\csnotes@str@warn{Warning}
+  \def\csnotes@str@warns{Warnings}
+  \def\csnotes@str@algo{Algorithm}
+  \def\csnotes@str@algos{Algorithms}
+  \def\csnotes@str@appendix{Appendix}
+  \def\csnotes@str@appendices{Appendices}
+  \def\csnotes@str@chap{Chapter}
+  \def\csnotes@str@chaps{Chapters}
+  \def\csnotes@str@sec{Section}
+  \def\csnotes@str@secs{Sections}
+  \def\csnotes@str@subsec{Subsection}
+  \def\csnotes@str@subsecs{Subsections}
+  \def\csnotes@str@fig{Figure}
+  \def\csnotes@str@figs{Figures}
+  \def\csnotes@str@tab{Table}
+  \def\csnotes@str@tabs{Tables}
+  \def\csnotes@str@eq{Equation}
+  \def\csnotes@str@eqs{Equations}
+  \def\csnotes@str@proof{Proof}
+  \def\csnotes@str@abstract{Document overview}
+  \def\csnotes@str@coursetitle{Course notes for}
+  \def\csnotes@str@students{Students:}
+  \def\csnotes@str@date{Date:}
+  \def\csnotes@str@endnotes{End of notes}
+  \def\csnotes@str@noteswritten{These notes were prepared during\\
+    the academic year}
+  \def\csnotes@str@at{at}
+  \def\csnotes@str@listthm{Index of theorems and definitions}
+  \def\csnotes@str@listex{Index of examples}
+  \def\csnotes@str@listalgo{Index of algorithms}
+  \def\csnotes@str@algoname{Downloadable:}
+  \def\csnotes@str@end{end}
+  \def\csnotes@str@do{do}
+  \def\csnotes@str@while{while}
+  \def\csnotes@str@for{for}
+  \def\csnotes@str@if{if}
+  \def\csnotes@str@then{then}
+  \def\csnotes@str@else{else}
+  \def\csnotes@str@return{return}
+  \def\csnotes@str@function{function}
+  \def\csnotes@str@procedure{procedure}
+}
+
+% --- Cleveref names: set at begin document based on language option ---
+\AtBeginDocument{
+  \ifcsnotes@english
+    \crefname{theorem}{theorem}{theorems}
+    \Crefname{theorem}{Theorem}{Theorems}
+    \crefname{corollary}{corollary}{corollaries}
+    \Crefname{corollary}{Corollary}{Corollaries}
+    \crefname{lemma}{lemma}{lemmas}
+    \Crefname{lemma}{Lemma}{Lemmas}
+    \crefname{proposition}{proposition}{propositions}
+    \Crefname{proposition}{Proposition}{Propositions}
+    \crefname{definition}{definition}{definitions}
+    \Crefname{definition}{Definition}{Definitions}
+    \crefname{example}{example}{examples}
+    \Crefname{example}{Example}{Examples}
+    \crefname{note}{note}{notes}
+    \Crefname{note}{Note}{Notes}
+    \crefname{observation}{observation}{observations}
+    \Crefname{observation}{Observation}{Observations}
+    \crefname{warning}{warning}{warnings}
+    \Crefname{warning}{Warning}{Warnings}
+    \crefname{algorithm}{algorithm}{algorithms}
+    \Crefname{algorithm}{Algorithm}{Algorithms}
+    \crefname{appendix}{appendix}{appendices}
+    \Crefname{appendix}{Appendix}{Appendices}
+    \crefname{chapter}{chapter}{chapters}
+    \Crefname{chapter}{Chapter}{Chapters}
+    \crefname{section}{section}{sections}
+    \Crefname{section}{Section}{Sections}
+    \crefname{subsection}{subsection}{subsections}
+    \Crefname{subsection}{Subsection}{Subsections}
+    \crefname{figure}{figure}{figures}
+    \Crefname{figure}{Figure}{Figures}
+    \crefname{table}{table}{tables}
+    \Crefname{table}{Table}{Tables}
+    \crefname{equation}{equation}{equations}
+    \Crefname{equation}{Equation}{Equations}
+  \else
+    \crefname{theorem}{teorema}{teoremi}
+    \Crefname{theorem}{Teorema}{Teoremi}
+    \crefname{corollary}{corollario}{corollari}
+    \Crefname{corollary}{Corollario}{Corollari}
+    \crefname{lemma}{lemma}{lemmi}
+    \Crefname{lemma}{Lemma}{Lemmi}
+    \crefname{proposition}{proposizione}{proposizioni}
+    \Crefname{proposition}{Proposizione}{Proposizioni}
+    \crefname{definition}{definizione}{definizioni}
+    \Crefname{definition}{Definizione}{Definizioni}
+    \crefname{example}{esempio}{esempi}
+    \Crefname{example}{Esempio}{Esempi}
+    \crefname{note}{nota}{note}
+    \Crefname{note}{Nota}{Note}
+    \crefname{observation}{osservazione}{osservazioni}
+    \Crefname{observation}{Osservazione}{Osservazioni}
+    \crefname{warning}{attenzione}{attenzioni}
+    \Crefname{warning}{Attenzione}{Attenzioni}
+    \crefname{algorithm}{algoritmo}{algoritmi}
+    \Crefname{algorithm}{Algoritmo}{Algoritmi}
+    \crefname{appendix}{appendice}{appendici}
+    \Crefname{appendix}{Appendice}{Appendici}
+    \crefname{chapter}{capitolo}{capitoli}
+    \Crefname{chapter}{Capitolo}{Capitoli}
+    \crefname{section}{sezione}{sezioni}
+    \Crefname{section}{Sezione}{Sezioni}
+    \crefname{subsection}{sottosezione}{sottosezioni}
+    \Crefname{subsection}{Sottosezione}{Sottosezioni}
+    \crefname{figure}{figura}{figure}
+    \Crefname{figure}{Figura}{Figure}
+    \crefname{table}{tabella}{tabelle}
+    \Crefname{table}{Tabella}{Tabelle}
+    \crefname{equation}{equazione}{equazioni}
+    \Crefname{equation}{Equazione}{Equazioni}
+  \fi
+}
+
+% =============================================================================
+% CUSTOM ALTERNATE REFERENCES
+% =============================================================================
 
 \newcommand{\crefalt}[2][black]{{\hypersetup{linkcolor={#1}}\cref{#2}}}
 \newcommand{\Crefalt}[2][black]{{\hypersetup{linkcolor={#1}}\Cref{#2}}}
@@ -265,16 +509,16 @@
 % NAMED REFERENCE SYSTEM
 % =============================================================================
 
-% Storage per i nomi degli ambienti (label -> nome)
+% Storage for environment names (label -> name)
 \ExplSyntaxOn
 \prop_new:N \g_envnames_prop
 
-% Comando interno richiamato sia a runtime sia dal file .aux
+% Internal command called both at runtime and from .aux
 \NewDocumentCommand{\csnotesstorelabelname}{m m}{
     \prop_gput:Nnn \g_envnames_prop {#1} {#2}
 }
 
-% Comando per salvare label+nome
+% Command to save label+name
 \NewDocumentCommand{\savelabelname}{m m}{
     \tl_if_empty:nF {#2} {
         \csnotesstorelabelname{#1}{#2}
@@ -284,15 +528,15 @@
     }
 }
 
-% Comando per recuperare il nome
+% Command to retrieve the name
 \NewDocumentCommand{\getlabelname}{m}{
     \prop_if_in:NnTF \g_envnames_prop {#1}
         { ~ (\prop_item:Nn \g_envnames_prop {#1})}
         { ~ (\nameref*{#1})}
 }
 
-% Comandi specializzati per reference con nome
-% Usare questi al posto di \Cref e \cref quando si vuole includere il nome
+% Specialized commands for named references
+% Use these instead of \Cref and \cref when you want to include the name
 \NewDocumentCommand{\Namedcref}{m}{
     \cref{#1}\getlabelname{#1}
 }
@@ -314,7 +558,7 @@
 
 \ExplSyntaxOff
 
-% Chiave personalizzata per tcolorbox: salva label e nome insieme
+% Custom tcolorbox key: saves label and name together
 \tcbset{
     namedlabel/.code 2 args={
         \tcbset{label={#1}}
@@ -327,9 +571,8 @@
 
 % -----------------------------------------------------------------------------
 % Abstract customization
-% By default use an Italian descriptive title instead of the English "Abstract".
-% Users can override with \setabstracttitle{...}
-\newcommand{\abstracttitle}{Scopo del documento}
+% The default title is localized; users can override with \setabstracttitle{...}
+\newcommand{\abstracttitle}{\csnotes@str@abstract}
 \newcommand{\setabstracttitle}[1]{\renewcommand{\abstracttitle}{#1}}
 
 \newcommand{\whitepage}{
@@ -448,7 +691,7 @@
     },
     theoremboxwhite/.style={
         enhanced,
-        colback=white,              % Sfondo bianco
+        colback=white,
         colframe=#1!80!black,
         colbacktitle=white,
         coltitle=#1!80!black,
@@ -474,8 +717,8 @@
 \newtcolorbox[auto counter, number within=section]{definition}[2][]{
     theorembox=defcolor,
     listtitle={#2},
-    title={Definizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{definition}{\protect\numberline{\thetcbcounter}Definizione\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
+    title={\csnotes@str@def~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{definition}{\protect\numberline{\thetcbcounter}\csnotes@str@def\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=definition,
     #1
 }
@@ -484,8 +727,8 @@
 \newtcolorbox[auto counter, number within=section]{theorem}[2][]{
     theorembox=thmcolor,
     listtitle={#2},
-    title={Teorema~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{theorem}{\protect\numberline{\thetcbcounter}Teorema\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
+    title={\csnotes@str@thm~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{theorem}{\protect\numberline{\thetcbcounter}\csnotes@str@thm\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=theorem,
     #1
 }
@@ -494,8 +737,8 @@
 \newtcolorbox[auto counter, number within=section]{lemma}[2][]{
     theorembox=lemcolor,
     listtitle={#2},
-    title={Lemma~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{lemma}{\protect\numberline{\thetcbcounter}Lemma\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
+    title={\csnotes@str@lem~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{lemma}{\protect\numberline{\thetcbcounter}\csnotes@str@lem\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=lemma,
     #1
 }
@@ -504,8 +747,8 @@
 \newtcolorbox[auto counter, number within=section]{proposition}[2][]{
     theorembox=propcolor,
     listtitle={#2},
-    title={Proposizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{proposition}{\protect\numberline{\thetcbcounter}Proposizione\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
+    title={\csnotes@str@prop~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{proposition}{\protect\numberline{\thetcbcounter}\csnotes@str@prop\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=proposition,
     #1
 }
@@ -514,8 +757,8 @@
 \newtcolorbox[auto counter, number within=section]{corollary}[2][]{
     theorembox=corcolor,
     listtitle={#2},
-    title={Corollario~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{thm.toc}{corollary}{\protect\numberline{\thetcbcounter}Corollario\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
+    title={\csnotes@str@cor~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{thm.toc}{corollary}{\protect\numberline{\thetcbcounter}\csnotes@str@cor\ifstrempty{\csnoteslisttitle}{#2}{:\ \csnoteslisttitle}}},
     label type=corollary,
     #1
 }
@@ -523,8 +766,8 @@
 % Example environment
 \newtcolorbox[auto counter, number within=section]{example}[2][]{
     theorembox=excolor,
-    title={Esempio~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{ex.toc}{example}{\protect\numberline{\thetcbcounter}Esempio\ifstrempty{#2}{}{:\ #2}}},
+    title={\csnotes@str@ex~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{ex.toc}{example}{\protect\numberline{\thetcbcounter}\csnotes@str@ex\ifstrempty{#2}{}{:\ #2}}},
     label type=example,
     #1
 }  
@@ -532,7 +775,7 @@
 % Note environment (NO INDEX)
 \newtcolorbox[auto counter, number within=section]{note}[2][]{
     theoremboxwhite=notecolor,
-    title={\infosymbol{}  Nota~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    title={\infosymbol{}  \csnotes@str@note~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     label type=note,
     #1
 }
@@ -540,7 +783,7 @@
 % Observation environment
 \newtcolorbox[auto counter, number within=section]{observation}[2][]{
     theorembox=notecolor,
-    title={Osservazione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    title={\csnotes@str@obs~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     label type=observation,
     #1
 }
@@ -548,7 +791,7 @@
 % Warning/Alert environment (NO INDEX)
 \newtcolorbox[auto counter, number within=section]{warning}[2][]{
     theorembox=warncolor,
-    title={Attenzione~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    title={\csnotes@str@warn~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
     label type=warning,
     #1
 }
@@ -556,13 +799,13 @@
 % Algorithm environment
 \newtcolorbox[auto counter, number within=section]{algorithmdesc}[2][]{
     theorembox=algocolor,
-    title={Algoritmo~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
-    before upper={\addcontentsline{algo.toc}{algorithmdesc}{\protect\numberline{\thetcbcounter}Algoritmo\ifstrempty{#2}{}{:\ #2}}},
+    title={\csnotes@str@algo~\thetcbcounter\ifstrempty{#2}{}{:~#2}},
+    before upper={\addcontentsline{algo.toc}{algorithmdesc}{\protect\numberline{\thetcbcounter}\csnotes@str@algo\ifstrempty{#2}{}{:\ #2}}},
     label type=algorithm,
     #1
 }
 % Customized proof environment
-\renewenvironment{proof}[1][Dimostrazione]
+\renewenvironment{proof}[1][\csnotes@str@proof]
     {\par\vspace{10pt}\noindent\textbf{\color{csblue}#1.}\ \normalfont\color{csblue!45!black}\phantomsection\ignorespaces}
   {\hfill$\square$\par\vspace{10pt}}
 
@@ -600,7 +843,7 @@
 \newcommand{\st}{:} % such that
 
 % Command for proof rule labels (automatically wraps in parentheses and math mode)
-\newcommand{\pool}[1]{\hfill{\footnotesize Scaricabile: #1}}
+\newcommand{\pool}[1]{\hfill{\footnotesize \csnotes@str@algoname\ #1}}
 \NewDocumentCommand{\RuleLabel}{m o}{
   \IfNoValueTF{#2}
     {\RightLabel{(#1)}}
@@ -638,18 +881,16 @@
 \newcommand{\academicyear}[1]{\renewcommand{\@academicyear}{#1}}
 
 % Command to create the title page
-% filepath: /Users/riccardoelena/Desktop/Università/Magistrale/Primo_Anno/E_E/Notes/csnotes.cls
-% Command to create the title page
 \newcommand{\maketitlepage}{
     \begin{titlepage}
-        % --- Disegno della Barra Laterale con TikZ ---
+        % --- Sidebar with TikZ ---
         \begin{tikzpicture}[remember picture, overlay]
-            % Barra laterale blu
+            % Blue sidebar
             \fill[csblue] 
                 (current page.south west) rectangle 
                 ([xshift=5cm]current page.north west);
             
-            % Logo di sfondo in trasparenza (centrato nell'area bianca)
+            % Background logo in transparency (centered in white area)
             \node[opacity=0.08, inner sep=0pt] at ([xshift=2.75cm]current page.center) {
                 \includegraphics[width=15cm]{_images/logo}
             };
@@ -658,86 +899,81 @@
         \vspace*{-.5cm}
         \enlargethispage{1cm}
         
-        % --- Intestazione (Allineata a Destra) ---
+        % --- Header (Right-aligned) ---
         \begin{minipage}[t]{\dimexpr\textwidth\relax}
           \begin{flushright}
-              %\vspace*{0.2cm} % Spazio dall'alto
-              
               {\Large\textsc{\@university}}\\[0.2cm]
               {\normalsize\textsc{\@department}}\\[0.1cm]
               {\normalsize\textsc{\@course}}
               
-              \null\hfill\rule{0.7\linewidth}{1pt} % Linea di separazione
+              \null\hfill\rule{0.7\linewidth}{1pt}
           \end{flushright}
         \end{minipage}
         
         
-        \vfill % Spazio centrale
+        \vfill
         
-        % --- Titolo Principale (Allineato a Sinistra nell'area bianca) ---
+        % --- Main Title (Left-aligned in white area) ---
         \hspace*{5.5cm} 
         \begin{minipage}[t]{\dimexpr\textwidth-5.5cm\relax}
             \begin{flushleft}
-                {\Large Appunti del corso di}\\[0.5cm]
+                {\Large \csnotes@str@coursetitle}\\[0.5cm]
                 {\Huge\bfseries\color{black!80}\@subject}\\[0.2cm]
                 
                 \vspace{0.1cm}
-                % Sezione di rinforzo del titolo
-                \rule{0.6\textwidth}{3pt} % Linea spessa che sottolinea il titolo
+                \rule{0.6\textwidth}{3pt}
                 \vspace{0.1cm}
             \end{flushleft}
         \end{minipage}
 
-        \vfill % Spinge il resto del contenuto in basso
+        \vfill
         
-        % --- Metadati (Studente, Data, Anno Accademico) ---
+        % --- Metadata (Students, Date, Academic Year) ---
         \hspace*{5.5cm} 
         \begin{minipage}[b]{\dimexpr\textwidth-5.5cm\relax}
             
-            % Studente a Sinistra
+            % Students on the left
             \begin{minipage}{0.4\linewidth}
                 \begin{flushleft}
                     \large
-                    \textbf{Studenti:}\\
+                    \textbf{\csnotes@str@students}\\
                     \@author
                 \end{flushleft}
             \end{minipage}
             \hfill
-            % Data a Destra
+            % Date on the right
             \begin{minipage}{0.4\linewidth}
                 \begin{flushright}
                     \large
-                    \textbf{Data:}\\
+                    \textbf{\csnotes@str@date}\\
                     \@date
                 \end{flushright}
             \end{minipage}
             
             \vspace{2cm}
             
-            % Anno Accademico al Centro (dell'area bianca)
+            % Academic Year centered
             \begin{center}
                 {\large\@academicyear}
             \end{center}
             
-            \vspace{1cm} % Margine finale
+            \vspace{1cm}
         \end{minipage}
         
     \end{titlepage}
 }
-
-% filepath: /Users/riccardoelena/Desktop/Università/Magistrale/Primo_Anno/E_E/Notes/csnotes.cls
 
 % Command to create the back cover page
 \newcommand{\makebackcover}{
     \clearpage
     \thispagestyle{empty}
     \begin{tikzpicture}[remember picture, overlay]
-        % Barra laterale blu (identica alla copertina)
+        % Blue sidebar (same as front cover)
         \fill[csblue] 
             (current page.south west) rectangle 
             ([xshift=5cm]current page.north west);
         
-        % Logo di sfondo in trasparenza (opzionale, centrato nell'area bianca)
+        % Background logo in transparency (optional, centered in white area)
         \node[opacity=0.05, inner sep=0pt] at ([xshift=2.75cm]current page.center) {
             \includegraphics[width=15cm]{_images/logo}
         };
@@ -746,26 +982,19 @@
     \vspace*{-2cm}
     \enlargethispage{2cm}
     
-    % Contenuto della quarta di copertina (opzionale)
+    % Back cover content (optional)
     \noindent\hspace*{5.5cm}%
     \begin{minipage}[c][\textheight][c]{\dimexpr\textwidth-6cm\relax}
         \begin{center}
             \vfill
             
-            % Puoi aggiungere qui informazioni come:
-            % - Ringraziamenti
-            % - Note aggiuntive
-            % - Informazioni di contatto
-            % - O lasciare vuoto per una pagina pulita
-            
-            {\large\textit{Fine degli appunti}}
+            {\large\textit{\csnotes@str@endnotes}}
             
             \vspace{2cm}
             
             {\normalsize
-            Questi appunti sono stati redatti durante\\
-            l'anno accademico \@academicyear\\[1cm]
-            presso \@university
+            \csnotes@str@noteswritten\ \@academicyear\\[1cm]
+            \csnotes@str@at\ \@university
             }
             
             \vfill
@@ -779,16 +1008,16 @@
 % ALGORITHM CONFIGURATION
 % =============================================================================
 
-\algrenewcommand\algorithmicend{\textbf{end}}
-\algrenewcommand\algorithmicdo{\textbf{do}}
-\algrenewcommand\algorithmicwhile{\textbf{while}}
-\algrenewcommand\algorithmicfor{\textbf{for}}
-\algrenewcommand\algorithmicif{\textbf{if}}
-\algrenewcommand\algorithmicthen{\textbf{then}}
-\algrenewcommand\algorithmicelse{\textbf{else}}
-\algrenewcommand\algorithmicreturn{\textbf{return}}
-\algrenewcommand\algorithmicfunction{\textbf{function}}
-\algrenewcommand\algorithmicprocedure{\textbf{procedure}}
+\algrenewcommand\algorithmicend{\csnotes@str@end}
+\algrenewcommand\algorithmicdo{\csnotes@str@do}
+\algrenewcommand\algorithmicwhile{\csnotes@str@while}
+\algrenewcommand\algorithmicfor{\csnotes@str@for}
+\algrenewcommand\algorithmicif{\csnotes@str@if}
+\algrenewcommand\algorithmicthen{\csnotes@str@then}
+\algrenewcommand\algorithmicelse{\csnotes@str@else}
+\algrenewcommand\algorithmicreturn{\csnotes@str@return}
+\algrenewcommand\algorithmicfunction{\csnotes@str@function}
+\algrenewcommand\algorithmicprocedure{\csnotes@str@procedure}
 
 % ==========================
 % TODOs 
@@ -804,14 +1033,14 @@
 \newcommand{\FIXME}[1]{\todo[color=csyellow!45]{#1}}
 
 % THEOREM INDEX (LIST) SUPPORT
-% Tre indici separati: riepilogo (definizioni, teoremi, lemmi, proposizioni, corollari),
-% esempi, e algoritmi. Note/Osservazioni/Avvertimenti esclusi.
+% Three separate indices: summary (definitions, theorems, lemmas, propositions, corollaries),
+% examples, and algorithms. Notes/Observations/Warnings excluded.
 \makeatletter
-\newcommand{\listtheoremname}{Indice di teoremi e definizioni}
-\newcommand{\listexamplename}{Indice degli esempi}
-\newcommand{\listalgoname}{Indice degli algoritmi}
+\newcommand{\listtheoremname}{\csnotes@str@listthm}
+\newcommand{\listexamplename}{\csnotes@str@listex}
+\newcommand{\listalgoname}{\csnotes@str@listalgo}
 
-% Macro di display per i tre file .toc
+% Display macros for the three .toc files
 \newcommand{\l@definition}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
 \newcommand{\l@theorem}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
 \newcommand{\l@lemma}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
@@ -820,7 +1049,7 @@
 \newcommand{\l@example}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
 \newcommand{\l@algorithmdesc}[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
 
-% Tre comandi indice con tre file separati
+% Three index commands with three separate files
 \newcommand{\listoftheorems}{\cleardoublepage\section*{\listtheoremname}\@starttoc{thm.toc}}
 \newcommand{\listofexamples}{\cleardoublepage\section*{\listexamplename}\@starttoc{ex.toc}}
 \newcommand{\listofalgos}{\cleardoublepage\section*{\listalgoname}\@starttoc{algo.toc}}
