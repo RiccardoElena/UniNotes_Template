@@ -1,0 +1,575 @@
+% =============================================================================
+% QUICK GUIDE - Customizing the CS Notes Template
+% =============================================================================
+
+\documentclass[]{csnotes}
+
+\title{Quick Guide}
+\author{CS Notes Template}
+\date{\today}
+
+\university{Reference Guide}
+\department{Customization}
+\course{LaTeX Template}
+\subject{Computer Science Notes}
+\academicyear{2024/2025}
+\addbibresource{bibliography.bib}
+
+\begin{document}
+\maketitlepage{}
+\tableofcontents
+% Three separate indexes:
+\listoftheorems
+\listofexamples
+\listofalgos
+
+\newpage
+
+% =============================================================================
+% COMMANDS AND ENVIRONMENTS
+% =============================================================================
+
+\section{Available Commands and Environments}
+
+\subsection{Environments for Theoretical Content}\label{sec:theoretical_environments}
+
+\begin{definition}{Definition Name (optional)}
+Use the \code{definition} environment for formal definitions.
+Color: Blue
+\end{definition}
+
+\begin{theorem}{Theorem Name (optional)}
+Use the \code{theorem} environment for important theorems.
+Color: Red
+\end{theorem}
+
+\begin{lemma}{Lemma Name (optional)}
+Use the \code{lemma} environment for lemmas and auxiliary results.
+Color: Orange
+\end{lemma}
+
+\begin{proposition}{Proposition Name (optional)}
+Use the \code{proposition} environment for propositions.
+Color: Purple
+\end{proposition}
+
+\begin{corollary}{Corollary Name (optional)}
+Use the \code{corollary} environment for corollaries.
+Color: Green
+\end{corollary}
+
+\subsection{Practical Environments}\label{sec:practical_environments}
+
+\begin{example}{Example Name (optional)}
+Use the \code{example} environment for practical examples and use cases.
+Color: Teal
+\end{example}
+
+\begin{observation}{Note Title (optional)}
+Use the \code{observation} environment for observations about specific topics.
+Color: Yellow
+\end{observation}
+
+\begin{note}{Note Title (optional)}
+Use the \code{note} environment for editor notes and deeper insights.
+Color: Yellow
+\end{note}
+
+\begin{warning}{Warning Title (optional)}
+Use the \code{warning} environment for warnings, common mistakes, and cautions.
+Color: Red
+\end{warning}
+
+\begin{algorithmdesc}{Algorithm Name (optional)}
+Use the \code{algorithmdesc} environment for algorithm descriptions.
+Color: Blue-gray
+\end{algorithmdesc}
+
+% =============================================================================
+% PROOF DEMONSTRATION
+% =============================================================================
+
+\section{Proofs}
+
+\begin{theorem}[label=thm:example]{Example with Proof}
+This is a theorem that requires a proof.
+\end{theorem}
+
+\begin{proof}
+Write the proof here. At the end, the QED symbol \(\square\) is added automatically.
+\end{proof}
+
+% Proof with a custom title
+\begin{proof}[Proof by contradiction]
+You can also customize the proof title.
+\end{proof}
+
+\begin{warning}{}
+  If an environment has no title, the empty braces must still be included:
+  \begin{lstlisting}[language=TeX]
+    \begin{proposition}{}
+    ...
+    \end{proposition}
+  \end{lstlisting}
+\end{warning}
+
+% =============================================================================
+% SPECIAL COMMANDS
+% =============================================================================
+
+\section{Special Commands}
+
+\subsection{Text Formatting}
+
+\begin{itemize}
+    \item \keyword{Keyword} --- Highlights important terms in bold blue
+    \item \code{inline code} --- Formats inline code with a gray background
+    \item \textbf{Regular bold} --- Standard boldface
+    \item \textit{Regular italic} --- Standard italics
+\end{itemize}
+
+\subsection{Complexity Notations}
+
+\begin{example}{Computational Complexity}
+Use the dedicated commands for asymptotic notation:
+\begin{itemize}
+    \item \code{\textbackslash{}BigO\{n\}} produces: \(\BigO{n}\)
+    \item \code{\textbackslash{}BigOmega\{n log n\}} produces: \(\BigOmega{n \log n}\)
+    \item \code{\textbackslash{}BigTheta\{n\^{}2\}} produces: \(\BigTheta{n^2}\)
+\end{itemize}
+\end{example}
+
+\subsection{Warning Symbols}
+
+Commands are available to insert attention and warning symbols in the text:
+\begin{itemize}
+    \item \code{\textbackslash{}warningsymbol} produces: \warningsymbol
+    \item \code{\textbackslash{}infosymbol} produces: \infosymbol
+\end{itemize}
+
+\subsection{Mathematical Commands}
+
+Commands for common numeric sets are predefined:
+\begin{itemize}
+    \item \code{\textbackslash{}N} produces: \(\N\)
+    \item \code{\textbackslash{}Z} produces: \(\Z\)
+    \item \code{\textbackslash{}Q} produces: \(\Q\)
+    \item \code{\textbackslash{}R} produces: \(\R\)
+    \item \code{\textbackslash{}C} produces: \(\C\)
+\end{itemize}
+
+In addition to these, the template also includes:
+\begin{itemize}
+    \item \code{\textbackslash{}abs\{x\}} produces: \(\abs{x}\)
+    \item \code{\textbackslash{}set\{x\}[condition]} produces: \(\set{x}[condition]\)
+    \item \code{\textbackslash{}st} produces: \(\st\)
+\end{itemize}
+
+\subsection{Other}
+
+Other useful commands included are:
+\begin{itemize}
+    \item \code{\textbackslash{}q{text}} for typographic quotation marks: \q{text}
+    \item \code{\textbackslash{}qi{text}} for italic typographic quotation marks: \qi{text}
+\end{itemize}
+
+% =============================================================================
+% CODE
+% =============================================================================
+
+\section{Inserting Code}
+
+\subsection{Inline Code}
+
+Use the command \code{\textbackslash{}code\{...\}} for short inline snippets,
+for example: \code{int x = 42;} or \code{list.append(item)}.
+
+\subsection{Code Blocks}
+
+\begin{example}{lstlisting Syntax}
+For longer code snippets, use the \code{lstlisting} environment:
+\end{example}
+
+\begin{lstlisting}[language=Python, caption=Basic example]
+def hello(name):
+    """Greets a person."""
+    print(f"Hello, {name}!")
+
+hello("Mario")
+\end{lstlisting}
+
+\begin{note}{Supported Languages}
+Some of the supported languages are:
+\begin{itemize}
+    \item Python
+    \item Java
+    \item C, C++
+    \item JavaScript
+    \item SQL
+    \item Haskell
+    \item Bash
+    \item And many more...
+\end{itemize}
+\end{note}
+
+\subsection{Listing Options}
+
+\begin{lstlisting}[
+    language=C++,
+    caption=Custom options,
+    label=lst:example,
+    numbers=left,
+    firstnumber=1,
+]
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello World!" << endl;
+    return 0;
+}
+\end{lstlisting}
+
+You can reference the listing with \ref{lst:example} using labels.
+
+% =============================================================================
+% MATHEMATICS
+% =============================================================================
+\newpage
+\section{Mathematical Formulas}
+
+\subsection{Inline Formulas}
+
+Use \code{\textbackslash(...\textbackslash)} for inline formulas:
+\(E = mc^2\), \(x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\).
+
+\subsection{Displayed Formulas}
+
+Use \code{\textbackslash[...\textbackslash]} for centered formulas:
+\[
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+\]
+
+\subsection{Equation Environments}
+
+\begin{equation}
+    \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+    \label{eq:gaussian}
+\end{equation}
+
+You can reference the equation with \eqref{eq:gaussian} using labels.
+
+\subsection{Systems of Equations}
+
+\begin{align}
+    x + y &= 5 \\
+    2x - y &= 1
+\end{align}
+
+% =============================================================================
+% LISTS AND ENUMERATIONS
+% =============================================================================
+
+\section{Lists}
+
+\subsection{Bullet Lists}
+
+\begin{itemize}
+    \item First item
+    \item Second item
+    \begin{itemize}
+        \item Sub-item
+        \item Another sub-item
+    \end{itemize}
+    \item Third item
+\end{itemize}
+
+\subsection{Numbered Lists}
+
+\begin{enumerate}
+    \item First step
+    \item Second step
+    \begin{enumerate}
+        \item Sub-step a
+        \item Sub-step b
+    \end{enumerate}
+    \item Third step
+\end{enumerate}
+
+\subsection{Description Lists}
+
+\begin{description}
+    \item[Stack] LIFO structure (Last In First Out)
+    \item[Queue] FIFO structure (First In First Out)
+    \item[Heap] Binary tree with ordering properties
+\end{description}
+
+% =============================================================================
+% TABLES AND FIGURES
+% =============================================================================
+
+\section{Tables}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Algorithm} & \textbf{Average Complexity} & \textbf{Worst Complexity} \\
+\hline
+QuickSort & \(\BigO{n \log n}\) & \(\BigO{n^2}\) \\
+MergeSort & \(\BigO{n \log n}\) & \(\BigO{n \log n}\) \\
+HeapSort & \(\BigO{n \log n}\) & \(\BigO{n \log n}\) \\
+\hline
+\end{tabular}
+\caption{Comparison of sorting algorithm complexity}
+\label{tab:sorting}
+\end{table}
+
+Reference to the table: see \cref{tab:sorting}.
+
+% =============================================================================
+% CROSS REFERENCES
+% =============================================================================
+
+\section{Cross References}
+
+\subsection{How to Use Labels and References}
+
+\begin{example}{Label System}
+Add labels to sections, figures, tables, and equations:
+  \begin{lstlisting}[language=TeX]
+  \section{Title}
+  \label{sec:title}
+
+  \begin{figure}
+      ...
+      \label{fig:chart}
+  \end{figure}
+
+  \begin{equation}
+      ...
+      \label{eq:formula}
+  \end{equation}
+  \end{lstlisting}
+\end{example}
+
+\begin{warning}{}
+  To add references to the custom environments in \Cref{sec:theoretical_environments} and \Cref{sec:practical_environments}, use labels as optional environment properties, for example:
+  \begin{lstlisting}[language=TeX]
+    \begin{theorem}[label=thm:example]{Theorem Title}
+    ...
+    \end{theorem}
+  \end{lstlisting}
+  Then you can refer to the theorem with \code{\textbackslash{}cref\{thm:example\}} to include the environment type near the reference, or with \code{\textbackslash{}ref\{thm:example\}} to get only the number.
+  For example: see \ref{thm:example}, or see \cref{thm:example}, or even \Cref{thm:example}.
+\end{warning}
+
+\subsection{Reference Types}
+
+\begin{itemize}
+    \item \code{\textbackslash{}ref\{label\}} --- Element number, example: \ref{sec:practical_environments}
+    \item \code{\textbackslash{}eqref\{label\}} --- Equation reference with parentheses \eqref{eq:gaussian}
+    \item \code{\textbackslash{}cref\{label\}} --- Smart reference (recommended), example: \cref{tab:sorting}
+    \item \code{\textbackslash{}Cref\{label\}} --- Same as cref but capitalized, example: \Cref{tab:sorting}
+\end{itemize}
+
+% =============================================================================
+% BIBLIOGRAPHY
+% =============================================================================
+
+\section{Bibliography (example)}
+
+Below is a minimal example of how to use BibLaTeX in your project.
+Note: add the line \verb|\addbibresource{bibliography.bib}| in the preamble of your main.tex (not here), then create the file bibliography.bib in the project root.
+
+\begin{lstlisting}[language=TeX]
+% In the preamble of main.tex:
+\addbibresource{bibliography.bib}
+
+% In the document body (citation example):
+As shown in \cite{cormen2009introduction}, sorting algorithms...
+% ...more text...
+
+% At the end of the document, before \end{document}:
+\printbibliography[title={References}]
+\end{lstlisting}
+
+Example bibliography.bib file:
+
+\begin{lstlisting}[language=TeX, caption=Example bibliography.bib file]
+@book{cormen2009introduction,
+  title     = {Introduction to Algorithms},
+  author    = {Cormen, Thomas H. and Leiserson, Charles E. and Rivest, Ronald L. and Stein, Clifford},
+  year      = {2009},
+  publisher = {MIT Press},
+}
+
+@article{dijkstra1959note,
+  title = {A note on two problems in connexion with graphs},
+  author = {Dijkstra, Edsger W.},
+  journal = {Numerische Mathematik},
+  year = {1959},
+  volume = {1},
+  pages = {269--271},
+}
+\end{lstlisting}
+
+
+
+
+% =============================================================================
+% FILE ORGANIZATION
+% =============================================================================
+
+\section{File Organization}
+
+\subsection{Recommended Structure}
+
+\begin{lstlisting}[language=bash]
+project/
+├── main.tex          % Main file
+├── csnotes.cls      % Custom class
+├── _chapters/       % Folder for chapters
+│   ├── 0_intro.tex
+│   ├── 1_chapter1.tex
+│   ├── 2_chapter2.tex
+│   └── ...
+├── images/          % Folder for images
+│   ├── figure1.png
+│   ├── figure2.jpg
+│   └── ...
+├── code/            % Folder for source code
+│   ├── example.py
+│   ├── algorithm.cpp
+│   └── ...
+└── bibliography.bib % Bibliography file
+\end{lstlisting}
+
+\subsection{Including External Files}
+
+\begin{example}{Input and Include}
+  \begin{lstlisting}[language=TeX]
+  % In main.tex
+  \section{Chapter 1}
+  \input{_chapters/chapter1}
+
+  \section{Chapter 2}
+  \input{_chapters/chapter2}
+
+  % For external code
+  \lstinputlisting[language=Python]{code/example.py}
+  \end{lstlisting}
+\end{example}
+
+% =============================================================================
+% CUSTOMIZATION
+% =============================================================================
+
+\section{Customization}
+
+\subsection{Changing Colors}
+
+To change the colors of the environments, edit the file \code{csnotes.cls}
+in the \q{COLOR DEFINITION} section:
+
+\begin{lstlisting}[language=TeX]
+% In csnotes.cls
+\definecolor{defcolor}{RGB}{0,102,204}   % Blue for definitions
+\definecolor{thmcolor}{RGB}{220,50,47}   % Red for theorems
+\definecolor{excolor}{RGB}{42,161,152}   % Teal for examples
+% ... etc
+\end{lstlisting}
+
+\begin{note}{RGB Colors}
+You can use any RGB value (0--255 for each component) or predefined names such as
+\code{red}, \code{blue}, \code{green}, etc.
+\end{note}
+
+\subsection{Changing Fonts and Margins}
+
+\begin{lstlisting}[language=TeX]
+% In csnotes.cls
+
+% Base font size (default: 11pt)
+\LoadClass[a4paper,11pt]{article}
+
+% Margins (default: 2.5cm)
+\RequirePackage[margin=2.5cm, top=3cm, bottom=3cm]{geometry}
+\end{lstlisting}
+
+\subsection{Adding New Environments}
+
+\begin{example}{Create a Custom Environment}
+To add a new environment (e.g. \q{Exercise}):
+\begin{lstlisting}[language=TeX]
+% In csnotes.cls, after the other environments
+
+% Define the color
+\definecolor{excolor}{RGB}{255,127,0}  % Orange
+
+% Create the environment
+\newtcolorbox{exercise}[2][]{
+    theorembox=excolor,
+    title={Exercise~#2},
+    #1
+}
+% Add localization for the environment type
+\crefname{exercise}{exercise}{exercises}
+\Crefname{exercise}{Exercise}{Exercises}
+\end{lstlisting}
+
+Then use it like this:
+\begin{lstlisting}[language=TeX]
+\begin{exercise}{Title}
+Exercise text...
+\end{exercise}
+\end{lstlisting}
+\end{example}
+
+% =============================================================================
+% TIPS & TRICKS
+% =============================================================================
+
+\section{Suggestions}
+
+\begin{note}{Best Practices}
+\begin{enumerate}
+    \item \textbf{Consistency}: Always use the same environment for the same type of content
+    \item \textbf{Brevity}: Keep boxes relatively short to avoid page break issues
+    \item \textbf{Keywords}: Use \code{\textbackslash{}keyword\{\}} to highlight important terms
+    \item \textbf{Organization}: Split long documents into separate files
+    \item \textbf{Comments}: Use comments (\code{\%}) for personal annotations
+\end{enumerate}
+\end{note}
+
+\begin{warning}{Common Mistakes}
+\begin{itemize}
+    \item Do not forget to compile twice to update references
+    \item Always use \code{\textbackslash(...\textbackslash)} instead of \code{\$...\$} for inline math
+    \item Check that the required packages are installed
+    \item Do not modify \code{csnotes.cls} unless you know exactly what you are doing
+\end{itemize}
+\end{warning}
+
+% =============================================================================
+% ADDITIONAL RESOURCES
+% =============================================================================
+
+\section{Useful Resources}
+
+\subsection{Documentation}
+
+\begin{itemize}
+    \item \textbf{tcolorbox}: \url{http://mirrors.ctan.org/macros/latex/contrib/tcolorbox/tcolorbox.pdf}
+    \item \textbf{listings}: \url{http://mirrors.ctan.org/macros/latex/contrib/listings/listings.pdf}
+    \item \textbf{amsmath}: \url{http://mirrors.ctan.org/macros/latex/required/amsmath/amsldoc.pdf}
+    \item \textbf{tikz}: \url{http://mirrors.ctan.org/graphics/pgf/base/doc/pgfmanual.pdf}
+\end{itemize}
+
+\makebackcover{}
+
+% =============================================================================
+% END
+% =============================================================================
+
+\end{document}
