@@ -14,10 +14,20 @@
 % =============================================================================
 
 \newif\ifcsnotes@english
-\csnotes@englishfalse
+\newif\ifcsnotes@italian
 
-\DeclareOption{english}{\csnotes@englishtrue}
-\DeclareOption{italian}{\csnotes@englishfalse}
+\csnotes@englishfalse
+\csnotes@italianfalse
+
+\DeclareOption{english}{
+  \csnotes@englishtrue
+  \csnotes@italianfalse
+}
+
+\DeclareOption{italian}{
+  \csnotes@englishfalse
+  \csnotes@italiantrue
+}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions\relax
 
@@ -302,6 +312,123 @@
 \def\csnotes@str@function{function}
 \def\csnotes@str@procedure{procedure}
 
+% Preserve the default strings before Babel applies a language hook.
+\let\csnotes@default@str@def\csnotes@str@def
+\let\csnotes@default@str@defs\csnotes@str@defs
+\let\csnotes@default@str@thm\csnotes@str@thm
+\let\csnotes@default@str@thms\csnotes@str@thms
+\let\csnotes@default@str@lem\csnotes@str@lem
+\let\csnotes@default@str@lems\csnotes@str@lems
+\let\csnotes@default@str@prop\csnotes@str@prop
+\let\csnotes@default@str@props\csnotes@str@props
+\let\csnotes@default@str@cor\csnotes@str@cor
+\let\csnotes@default@str@cors\csnotes@str@cors
+\let\csnotes@default@str@ex\csnotes@str@ex
+\let\csnotes@default@str@exs\csnotes@str@exs
+\let\csnotes@default@str@note\csnotes@str@note
+\let\csnotes@default@str@notes\csnotes@str@notes
+\let\csnotes@default@str@obs\csnotes@str@obs
+\let\csnotes@default@str@obss\csnotes@str@obss
+\let\csnotes@default@str@warn\csnotes@str@warn
+\let\csnotes@default@str@warns\csnotes@str@warns
+\let\csnotes@default@str@algo\csnotes@str@algo
+\let\csnotes@default@str@algos\csnotes@str@algos
+\let\csnotes@default@str@end\csnotes@str@end
+\let\csnotes@default@str@do\csnotes@str@do
+\let\csnotes@default@str@while\csnotes@str@while
+\let\csnotes@default@str@for\csnotes@str@for
+\let\csnotes@default@str@if\csnotes@str@if
+\let\csnotes@default@str@then\csnotes@str@then
+\let\csnotes@default@str@else\csnotes@str@else
+\let\csnotes@default@str@return\csnotes@str@return
+\let\csnotes@default@str@function\csnotes@str@function
+\let\csnotes@default@str@procedure\csnotes@str@procedure
+\let\csnotes@default@str@appendix\csnotes@str@appendix
+\let\csnotes@default@str@appendices\csnotes@str@appendices
+\let\csnotes@default@str@chap\csnotes@str@chap
+\let\csnotes@default@str@chaps\csnotes@str@chaps
+\let\csnotes@default@str@sec\csnotes@str@sec
+\let\csnotes@default@str@secs\csnotes@str@secs
+\let\csnotes@default@str@subsec\csnotes@str@subsec
+\let\csnotes@default@str@subsecs\csnotes@str@subsecs
+\let\csnotes@default@str@fig\csnotes@str@fig
+\let\csnotes@default@str@figs\csnotes@str@figs
+\let\csnotes@default@str@tab\csnotes@str@tab
+\let\csnotes@default@str@tabs\csnotes@str@tabs
+\let\csnotes@default@str@eq\csnotes@str@eq
+\let\csnotes@default@str@eqs\csnotes@str@eqs
+\let\csnotes@default@str@proof\csnotes@str@proof
+\let\csnotes@default@str@abstract\csnotes@str@abstract
+\let\csnotes@default@str@coursetitle\csnotes@str@coursetitle
+\let\csnotes@default@str@students\csnotes@str@students
+\let\csnotes@default@str@date\csnotes@str@date
+\let\csnotes@default@str@endnotes\csnotes@str@endnotes
+\let\csnotes@default@str@noteswritten\csnotes@str@noteswritten
+\let\csnotes@default@str@at\csnotes@str@at
+\let\csnotes@default@str@listthm\csnotes@str@listthm
+\let\csnotes@default@str@listex\csnotes@str@listex
+\let\csnotes@default@str@listalgo\csnotes@str@listalgo
+\let\csnotes@default@str@algoname\csnotes@str@algoname
+
+\def\csnotes@restore@default{%
+    \let\csnotes@str@def\csnotes@default@str@def
+    \let\csnotes@str@defs\csnotes@default@str@defs
+    \let\csnotes@str@thm\csnotes@default@str@thm
+    \let\csnotes@str@thms\csnotes@default@str@thms
+    \let\csnotes@str@lem\csnotes@default@str@lem
+    \let\csnotes@str@lems\csnotes@default@str@lems
+    \let\csnotes@str@prop\csnotes@default@str@prop
+    \let\csnotes@str@props\csnotes@default@str@props
+    \let\csnotes@str@cor\csnotes@default@str@cor
+    \let\csnotes@str@cors\csnotes@default@str@cors
+    \let\csnotes@str@ex\csnotes@default@str@ex
+    \let\csnotes@str@exs\csnotes@default@str@exs
+    \let\csnotes@str@note\csnotes@default@str@note
+    \let\csnotes@str@notes\csnotes@default@str@notes
+    \let\csnotes@str@obs\csnotes@default@str@obs
+    \let\csnotes@str@obss\csnotes@default@str@obss
+    \let\csnotes@str@warn\csnotes@default@str@warn
+    \let\csnotes@str@warns\csnotes@default@str@warns
+    \let\csnotes@str@algo\csnotes@default@str@algo
+    \let\csnotes@str@algos\csnotes@default@str@algos
+    \let\csnotes@str@appendix\csnotes@default@str@appendix
+    \let\csnotes@str@appendices\csnotes@default@str@appendices
+    \let\csnotes@str@chap\csnotes@default@str@chap
+    \let\csnotes@str@chaps\csnotes@default@str@chaps
+    \let\csnotes@str@sec\csnotes@default@str@sec
+    \let\csnotes@str@secs\csnotes@default@str@secs
+    \let\csnotes@str@subsec\csnotes@default@str@subsec
+    \let\csnotes@str@subsecs\csnotes@default@str@subsecs
+    \let\csnotes@str@fig\csnotes@default@str@fig
+    \let\csnotes@str@figs\csnotes@default@str@figs
+    \let\csnotes@str@tab\csnotes@default@str@tab
+    \let\csnotes@str@tabs\csnotes@default@str@tabs
+    \let\csnotes@str@eq\csnotes@default@str@eq
+    \let\csnotes@str@eqs\csnotes@default@str@eqs
+    \let\csnotes@str@proof\csnotes@default@str@proof
+    \let\csnotes@str@abstract\csnotes@default@str@abstract
+    \let\csnotes@str@coursetitle\csnotes@default@str@coursetitle
+    \let\csnotes@str@students\csnotes@default@str@students
+    \let\csnotes@str@date\csnotes@default@str@date
+    \let\csnotes@str@endnotes\csnotes@default@str@endnotes
+    \let\csnotes@str@noteswritten\csnotes@default@str@noteswritten
+    \let\csnotes@str@at\csnotes@default@str@at
+    \let\csnotes@str@listthm\csnotes@default@str@listthm
+    \let\csnotes@str@listex\csnotes@default@str@listex
+    \let\csnotes@str@listalgo\csnotes@default@str@listalgo
+    \let\csnotes@str@algoname\csnotes@default@str@algoname
+    \let\csnotes@str@end\csnotes@default@str@end
+    \let\csnotes@str@do\csnotes@default@str@do
+    \let\csnotes@str@while\csnotes@default@str@while
+    \let\csnotes@str@for\csnotes@default@str@for
+    \let\csnotes@str@if\csnotes@default@str@if
+    \let\csnotes@str@then\csnotes@default@str@then
+    \let\csnotes@str@else\csnotes@default@str@else
+    \let\csnotes@str@return\csnotes@default@str@return
+    \let\csnotes@str@function\csnotes@default@str@function
+    \let\csnotes@str@procedure\csnotes@default@str@procedure
+}
+
 % --- Italian babel hook ---
 \addto\captionsitalian{
   \def\csnotes@str@def{Definizione}
@@ -425,6 +552,16 @@
 
 % --- Cleveref names: set at begin document based on language option ---
 \AtBeginDocument{
+    \ifcsnotes@english
+        % English Babel strings are already selected.
+    \else
+        \ifcsnotes@italian
+            % Italian Babel strings are already selected.
+        \else
+            \csnotes@restore@default
+        \fi
+    \fi
+
   \ifcsnotes@english
     \crefname{theorem}{theorem}{theorems}
     \Crefname{theorem}{Theorem}{Theorems}
@@ -461,40 +598,77 @@
     \crefname{equation}{equation}{equations}
     \Crefname{equation}{Equation}{Equations}
   \else
-    \crefname{theorem}{teorema}{teoremi}
-    \Crefname{theorem}{Teorema}{Teoremi}
-    \crefname{corollary}{corollario}{corollari}
-    \Crefname{corollary}{Corollario}{Corollari}
-    \crefname{lemma}{lemma}{lemmi}
-    \Crefname{lemma}{Lemma}{Lemmi}
-    \crefname{proposition}{proposizione}{proposizioni}
-    \Crefname{proposition}{Proposizione}{Proposizioni}
-    \crefname{definition}{definizione}{definizioni}
-    \Crefname{definition}{Definizione}{Definizioni}
-    \crefname{example}{esempio}{esempi}
-    \Crefname{example}{Esempio}{Esempi}
-    \crefname{note}{nota}{note}
-    \Crefname{note}{Nota}{Note}
-    \crefname{observation}{osservazione}{osservazioni}
-    \Crefname{observation}{Osservazione}{Osservazioni}
-    \crefname{warning}{attenzione}{attenzioni}
-    \Crefname{warning}{Attenzione}{Attenzioni}
-    \crefname{algorithm}{algoritmo}{algoritmi}
-    \Crefname{algorithm}{Algoritmo}{Algoritmi}
-    \crefname{appendix}{appendice}{appendici}
-    \Crefname{appendix}{Appendice}{Appendici}
-    \crefname{chapter}{capitolo}{capitoli}
-    \Crefname{chapter}{Capitolo}{Capitoli}
-    \crefname{section}{sezione}{sezioni}
-    \Crefname{section}{Sezione}{Sezioni}
-    \crefname{subsection}{sottosezione}{sottosezioni}
-    \Crefname{subsection}{Sottosezione}{Sottosezioni}
-    \crefname{figure}{figura}{figure}
-    \Crefname{figure}{Figura}{Figure}
-    \crefname{table}{tabella}{tabelle}
-    \Crefname{table}{Tabella}{Tabelle}
-    \crefname{equation}{equazione}{equazioni}
-    \Crefname{equation}{Equazione}{Equazioni}
+    \ifcsnotes@italian
+      \crefname{theorem}{teorema}{teoremi}
+      \Crefname{theorem}{Teorema}{Teoremi}
+      \crefname{corollary}{corollario}{corollari}
+      \Crefname{corollary}{Corollario}{Corollari}
+      \crefname{lemma}{lemma}{lemmi}
+      \Crefname{lemma}{Lemma}{Lemmi}
+      \crefname{proposition}{proposizione}{proposizioni}
+      \Crefname{proposition}{Proposizione}{Proposizioni}
+      \crefname{definition}{definizione}{definizioni}
+      \Crefname{definition}{Definizione}{Definizioni}
+      \crefname{example}{esempio}{esempi}
+      \Crefname{example}{Esempio}{Esempi}
+      \crefname{note}{nota}{note}
+      \Crefname{note}{Nota}{Note}
+      \crefname{observation}{osservazione}{osservazioni}
+      \Crefname{observation}{Osservazione}{Osservazioni}
+      \crefname{warning}{attenzione}{attenzioni}
+      \Crefname{warning}{Attenzione}{Attenzioni}
+      \crefname{algorithm}{algoritmo}{algoritmi}
+      \Crefname{algorithm}{Algoritmo}{Algoritmi}
+      \crefname{appendix}{appendice}{appendici}
+      \Crefname{appendix}{Appendice}{Appendici}
+      \crefname{chapter}{capitolo}{capitoli}
+      \Crefname{chapter}{Capitolo}{Capitoli}
+      \crefname{section}{sezione}{sezioni}
+      \Crefname{section}{Sezione}{Sezioni}
+      \crefname{subsection}{sottosezione}{sottosezioni}
+      \Crefname{subsection}{Sottosezione}{Sottosezioni}
+      \crefname{figure}{figura}{figure}
+      \Crefname{figure}{Figura}{Figure}
+      \crefname{table}{tabella}{tabelle}
+      \Crefname{table}{Tabella}{Tabelle}
+      \crefname{equation}{equazione}{equazioni}
+      \Crefname{equation}{Equazione}{Equazioni}
+      \else
+        \crefname{theorem}{teorema}{teoremi}
+        \Crefname{theorem}{Teorema}{Teoremi}
+        \crefname{corollary}{corollario}{corollari}
+        \Crefname{corollary}{Corollario}{Corollari}
+        \crefname{lemma}{lemma}{lemmi}
+        \Crefname{lemma}{Lemma}{Lemmi}
+        \crefname{proposition}{proposizione}{proposizioni}
+        \Crefname{proposition}{Proposizione}{Proposizioni}
+        \crefname{definition}{definizione}{definizioni}
+        \Crefname{definition}{Definizione}{Definizioni}
+        \crefname{example}{esempio}{esempi}
+        \Crefname{example}{Esempio}{Esempi}
+        \crefname{note}{nota}{note}
+        \Crefname{note}{Nota}{Note}
+        \crefname{observation}{osservazione}{osservazioni}
+        \Crefname{observation}{Osservazione}{Osservazioni}
+        \crefname{warning}{attenzione}{attenzioni}
+        \Crefname{warning}{Attenzione}{Attenzioni}
+        \crefname{algorithm}{algoritmo}{algoritmi}
+        \Crefname{algorithm}{Algoritmo}{Algoritmi}
+        \crefname{appendix}{appendice}{appendici}
+        \Crefname{appendix}{Appendice}{Appendici}
+        \crefname{chapter}{capitolo}{capitoli}
+        \Crefname{chapter}{Capitolo}{Capitoli}
+        \crefname{section}{sezione}{sezioni}
+        \Crefname{section}{Sezione}{Sezioni}
+        \crefname{subsection}{sottosezione}{sottosezioni}
+        \Crefname{subsection}{Sottosezione}{Sottosezioni}
+        \crefname{figure}{figura}{figure}
+        \Crefname{figure}{Figura}{Figure}
+        \crefname{table}{tabella}{tabelle}
+        \Crefname{table}{Tabella}{Tabelle}
+        \crefname{equation}{equazione}{equazioni}
+        \Crefname{equation}{Equazione}{Equazioni}
+      \fi
   \fi
 }
 
