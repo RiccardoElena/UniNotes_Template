@@ -291,16 +291,16 @@
 \def\csnotes@str@listex{Indice degli esempi}
 \def\csnotes@str@listalgo{Indice degli algoritmi}
 \def\csnotes@str@algoname{Scaricabile:}
-\def\csnotes@str@end{fine}
-\def\csnotes@str@do{fai}
-\def\csnotes@str@while{mentre}
-\def\csnotes@str@for{per}
-\def\csnotes@str@if{se}
-\def\csnotes@str@then{allora}
-\def\csnotes@str@else{altrimenti}
-\def\csnotes@str@return{restituisci}
-\def\csnotes@str@function{funzione}
-\def\csnotes@str@procedure{procedura}
+\def\csnotes@str@end{end}
+\def\csnotes@str@do{do}
+\def\csnotes@str@while{while}
+\def\csnotes@str@for{for}
+\def\csnotes@str@if{if}
+\def\csnotes@str@then{then}
+\def\csnotes@str@else{else}
+\def\csnotes@str@return{return}
+\def\csnotes@str@function{function}
+\def\csnotes@str@procedure{procedure}
 
 % --- Italian babel hook ---
 \addto\captionsitalian{
@@ -410,7 +410,7 @@
   \def\csnotes@str@listthm{Index of theorems and definitions}
   \def\csnotes@str@listex{Index of examples}
   \def\csnotes@str@listalgo{Index of algorithms}
-  \def\csnotes@str@algoname{Downloadable:}
+  \def\csnotes@str@algoname{Dischargeable:}
   \def\csnotes@str@end{end}
   \def\csnotes@str@do{do}
   \def\csnotes@str@while{while}
