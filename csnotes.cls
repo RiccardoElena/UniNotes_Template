@@ -1074,7 +1074,8 @@
         \enlargethispage{1cm}
         
         % --- Header (Right-aligned) ---
-        \begin{minipage}[t]{\dimexpr\textwidth\relax}
+                \hspace*{5cm}
+                \begin{minipage}[t]{\dimexpr\textwidth-5cm\relax}
           \begin{flushright}
               {\Large\textsc{\@university}}\\[0.2cm]
               {\normalsize\textsc{\@department}}\\[0.1cm]
@@ -1088,8 +1089,8 @@
         \vfill
         
         % --- Main Title (Left-aligned in white area) ---
-        \hspace*{5.5cm} 
-        \begin{minipage}[t]{\dimexpr\textwidth-5.5cm\relax}
+        \hspace*{5cm} 
+        \begin{minipage}[t]{\dimexpr\textwidth-5cm\relax}
             \begin{flushleft}
                 {\Large \csnotes@str@coursetitle}\\[0.5cm]
                 {\Huge\bfseries\color{black!80}\@subject}\\[0.2cm]
@@ -1103,8 +1104,8 @@
         \vfill
         
         % --- Metadata (Students, Date, Academic Year) ---
-        \hspace*{5.5cm} 
-        \begin{minipage}[b]{\dimexpr\textwidth-5.5cm\relax}
+        \hspace*{5cm} 
+        \begin{minipage}[b]{\dimexpr\textwidth-5cm\relax}
             
             % Students on the left
             \begin{minipage}{0.4\linewidth}
